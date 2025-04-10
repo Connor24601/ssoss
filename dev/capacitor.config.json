@@ -1,0 +1,10 @@
+{
+  "appId": "com.ssoss.app",
+  "appName": "ssoss",
+  "webDir": "dist",
+  "plugins": {
+    "SplashScreen": {
+      "launchAutoHide": false
+    }
+  }
+}

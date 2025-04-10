@@ -1,0 +1,111 @@
+
+p {
+    background-color: lemonchiffon;
+    border: dashed 1px black;
+}
+#inputContainer
+{
+
+    display: inline-flex;
+    vertical-align: middle;
+    gap: 5%;
+    text-align: center;
+    align-content: center;
+    scroll-padding: 10%;
+    overflow: hidden;
+    justify-content: center;
+    align-items: flex-start;
+    align-self: end;
+    overscroll-behavior-x: contain;
+    background-color: #33333366;
+    border-radius: 25px;
+    padding: 20px 50px 5px 20px;
+    margin: 5px;
+}
+body {
+    background-image: linear-gradient(#110600,#060611 );
+    background-attachment: fixed;
+    text-align: center;
+    flex:1;
+    max-width: 100%;
+    display:flex;
+    overflow: hidden;
+    margin: 0px;
+}
+main {
+    justify-content: center;
+    vertical-align: center;
+    align-content: center;
+    display:flex;
+    max-width:100%;
+    flex: 1;
+
+}
+
+html
+{
+    display: flex;
+    flex:1;
+    height: 100%;
+    overscroll-behavior-x: none;
+    margin: 0px;
+}
+
+header
+{
+    min-height: 2.5%;
+    display:block;
+}
+footer
+{
+    min-height: 2.5%;
+    bottom:10px;
+    right: 10px;
+    position: fixed;
+    display:flow-root;
+
+}
+
+
+.toggle {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  .toggle input {
+    display: none;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #333;
+    transition: 0.4s;
+    border-radius: 34px;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #FFF;
+    transition: 0.4s;
+    border-radius: 50%;
+  }
+  
+  input:checked + .slider {
+    background-color: #048;
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(26px);
+  }

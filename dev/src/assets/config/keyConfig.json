@@ -1,0 +1,173 @@
+{
+	"keys":
+		[
+			[
+				"escape",
+				{
+					"offset": 1.25
+				},
+				"f1",
+				"f2",
+				"f3",
+				"f4",
+				{
+					"offset": 1
+				},
+				"f5",
+				"f6",
+				"f7",
+				"f8",
+				{
+					"offset": 1
+				},
+				"f9",
+				"f10",
+				"f11",
+				"f12"
+			],
+		
+			[
+				{
+					"gap":0.5
+				},
+				"backquote",
+				"digit1",
+				"digit2",
+				"digit3",
+				"digit4",
+				"digit5",
+				"digit6",
+				"digit7",
+				"digit8",
+				"digit9",
+				"digit0",
+				"minus",
+				"equal",
+				{
+					"backspace": {
+						"size": 2.5
+					}
+				}
+			],
+			[
+				{
+					"tab": {
+						"size": 1.5
+					}
+				},
+				"keyQ",
+				"keyW",
+				"keyE",
+				"keyR",
+				"keyT",
+				"keyY",
+				"keyU",
+				"keyI",
+				"keyO",
+				"keyP",
+				"bracketLeft",
+				"bracketRight",
+				{
+					"backslash": {
+						"size": 1.5
+					}
+				}
+			],
+			[
+				{
+					"capslock": {
+						"size": 1.75
+					}
+				},
+				{
+					"offset":0.5
+				},
+				"keyA",
+				"keyS",
+				"keyD",
+				"keyF",
+				"keyG",
+				"keyH",
+				"keyJ",
+				"keyK",
+				"keyL",
+				"semicolon",
+				"quote",
+				{
+					"enter": {
+						"size":4
+					}
+				}
+			],
+			[
+				{
+					"shiftLeft": {
+						"size":2.25
+					}
+
+				},
+				"keyZ",
+				"keyX",
+				"keyC",
+				"keyV",
+				"keyB",
+				"keyN",
+				"keyM",
+				"comma",
+				"period",
+				"slash",
+				{
+					"shiftRight": {
+						"size":1.75
+					}
+				},
+				{
+					"offset": 1
+				},
+				"arrowUp"
+			],
+			[
+				{
+					"controlLeft": {
+						"size":1.5
+					}
+				},
+				{
+					"metaLeft": {
+						"size":1.25
+					}
+				},
+				{
+					"altLeft": {
+						"size":1.25
+					}
+				},
+				{
+					"space": {
+						"size":9
+					}
+				},
+				{
+					"altRight": {
+						"size":1.5
+					}
+				},
+				{
+					"fn": {
+						"size":1.5
+					}
+				},
+				{
+					"controlRight": {
+						"size":1.25
+					}
+				},
+				{
+					"offset": 2.5
+				},
+				"arrowLeft",
+				"arrowDown",
+				"arrowRight"
+			]
+		]
+}

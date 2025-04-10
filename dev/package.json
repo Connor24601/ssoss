@@ -1,0 +1,32 @@
+{
+  "name": "ssoss",
+  "version": "0.0.0",
+  "description": "Streaming service organization site service, some shitty operating system site",
+  "type": "module",
+  "keywords": [
+    "TV",
+    "TVOS",
+    "mobile",
+    "streaming"
+  ],
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "sync": "npx cap sync"
+  },
+  "dependencies": {
+    "@capacitor/android": "^7.2.0",
+    "@capacitor/camera": "latest",
+    "@capacitor/core": "^7.2.0",
+    "@capacitor/ios": "^7.2.0",
+    "@capacitor/splash-screen": "latest"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^7.2.0",
+    "vite": "^6.2.5",
+    "typescript": "^5.8.2"
+  },
+  "author": "",
+  "license": "ISC"
+}

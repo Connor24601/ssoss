@@ -1,0 +1,12 @@
+.key-down {
+	animation: keyPress .1s 0s forwards once;
+}
+
+@keyframes keyPress {
+	from {
+
+	}
+	to {
+		
+	}
+}
