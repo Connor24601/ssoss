@@ -24,8 +24,8 @@
   },
   "devDependencies": {
     "@capacitor/cli": "^7.2.0",
-    "vite": "^6.2.5",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "vite": "^6.2.5"
   },
   "author": "",
   "license": "ISC"

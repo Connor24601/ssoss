@@ -1,26 +1,21 @@
+import { BlobId } from "../resources/constants.js";
 import { ContentBlob } from "./ContentBlob.js";
 
 class BlobManager
 {
 	//Dict<String blobId, Blob> blobs;
 
-	static testBlob:ContentBlob = new ContentBlob(); //todo: figure out how args work
-	static defaultBlobs:Map<string,ContentBlob> = new Map<string,ContentBlob>([[
-		"test",BlobManager.testBlob
+	//static testBlob:ContentBlob = new ContentBlob(); //todo: figure out how args work
+	static defaultBlobs:Map<BlobId,ContentBlob> = new Map<BlobId,ContentBlob>();
 	
 	
-	]]);
-	
-	
-	customTestBlob:ContentBlob = new ContentBlob();
-	customBlobs!:Map<string,ContentBlob>;
+	//customTestBlob:ContentBlob = new ContentBlob();
+	customBlobs:Map<BlobId,ContentBlob> =  new Map<BlobId,ContentBlob>();;
 
 
-	BlobManager(customBlobs:Map<string,ContentBlob>)
+	BlobManager()
 	{
 		
-		this.customBlobs = new Map<string,ContentBlob>();
-		this.customBlobs.set('customTest',this.customTestBlob);
 		return;
 	}
 	

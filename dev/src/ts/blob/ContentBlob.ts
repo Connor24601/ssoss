@@ -1,23 +1,21 @@
 import './BlobManager'
-import { BlobType } from '../resources/constants.js';
+import { BlobId, BlobType } from '../resources/constants.js';
 //import React from 'react';
 
 export class ContentBlob
 {
-	// variables
-	//string BlobEnumValue // TODO: decide if this should exist or be merged with id
-							// considerations: duplicate of same blob
 
-	id : string = "";
+	id! : BlobId;
 	redirect?: URL;
 	defaultName!:string;
 	blobType!:BlobType;
 
-	ContentBlob(id: string, redirect: URL, defaultName:string, blobType:BlobType)
+	constructor(id: BlobId, redirect: URL, defaultName:string, blobType:BlobType)
 	{
 		this.id = id;
 		this.redirect = redirect;
 		this.defaultName = defaultName;
+		
 		this.blobType = blobType;
 		return;
 	};
@@ -35,7 +33,6 @@ export class ContentBlob
 	//Set<profileId>? CollaborativeBlobUsers
 
 	// methods
-	// constructor(from JS)
 	//bool removeAllBlobAuth()
 	//bool addBlobAuth(BlobAuth) // BlobAuth should contain BlobEnum
 	//bool removeBlobAuth(profileId)
