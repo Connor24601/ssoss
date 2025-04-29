@@ -8,7 +8,7 @@ export class BlobElement
 
 	constructor (id: string)
 	{
-		console.log("I am a blob: ");
+		//console.log("I am a blob: ");
 		this.id = id;
 		this.element = document.createElement("blob");
 		this.element.setAttribute("id", id);

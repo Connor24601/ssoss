@@ -26,18 +26,22 @@
     <meta name="theme-color" content="#31d53d" />
   </head>
   <body>
-    <script src="./ts/views/home.ts" type="module"></script>
-    <test-element></test-element>
-
     
-  </body>
-  <footer>
-    <div id="inputContainer">
-      <label class="toggle">
-        <input type="checkbox" id="btnToggle" name="btnToggle" />
-        <span class="slider"></span>
-      </label>
-    </div>
-    <script type="module" src="./ts/views/input.ts"></script>
-  </footer>
+    <script>0</script> 
+    <!-- https://stackoverflow.com/questions/21147149/flash-of-unstyled-content-fouc-in-firefox-only-is-ff-slow-renderer -->
+    <script src="./ts/load.ts" type="module"></script>
+    <main>
+      <home-screen/>
+    </main>
+  
+    <footer>
+      <div id="inputContainer">
+        <label class="toggle">
+          <input type="checkbox" id="btnToggle" name="btnToggle" />
+          <span class="slider"></span>
+        </label>
+      </div>
+      <script type="module" src="./ts/views/input.ts"></script>
+    </footer>
+</body>
 </html>

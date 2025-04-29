@@ -5,6 +5,7 @@ node_modules/
 .vscode/
 *.map
 .DS_Store
+../.DS_Store
 .sourcemaps
 
 # Compiled files

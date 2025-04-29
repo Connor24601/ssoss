@@ -20,14 +20,11 @@ export class ContentBlob
 		return;
 	};
 
-	
+	//string? defaultProfileId // which collab user to use
 	//string defaultName
 	//icon? defaultIcon
 	//BlobType blobType
 	
-	
-	
-
 
 	//Dict<profileId, BlobAuth> BlobAuths
 	//Set<profileId>? CollaborativeBlobUsers

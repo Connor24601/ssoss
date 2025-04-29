@@ -5,7 +5,7 @@ export class BlobMetaData
 {
 	// this is all the info for one blob for one user, NOT counting auth
 	// variables
-	//Icon? icon
+	//CustomIcon? icon
 	blobId!:BlobId;
 	name?:string;
 	isCollaborative?:boolean = false;
@@ -13,7 +13,7 @@ export class BlobMetaData
 	pinnedPosition?:{col:number, row:number};
 	defaultProfileId?:string;
 	skipUserPrompt:boolean = false;
-	//string? defaultProfileId // which collab user to use
+	
 	//bool? skipCollabPrompt // "which user would you like to log in as"
 	//Bool? isHidden
 }

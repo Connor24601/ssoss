@@ -1,7 +1,7 @@
 import { BlobId } from "../resources/constants.js";
 import { ContentBlob } from "./ContentBlob.js";
 
-class BlobManager
+export class BlobManager
 {
 	//Dict<String blobId, Blob> blobs;
 
