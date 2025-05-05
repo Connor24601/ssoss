@@ -1,9 +1,11 @@
-import { LogService } from "../util/LogService.js";
+import { ServiceProvider } from "../util/ServiceProvider.js";
 
-const _logger = LogService.logger;
+
+
 
 export class ProfileManager
 {
+    _logger = ServiceProvider.logService.logger;
     constructor() {
 
     }

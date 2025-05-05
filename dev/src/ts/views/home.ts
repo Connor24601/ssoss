@@ -1,5 +1,7 @@
 import { BlobElement } from "./blobElement.js";
-import * as settings from "../../assets/icon/settings.svg";
+import content from "../../assets/icon/settings.svg";
+
+
 import { ServiceProvider } from "../util/ServiceProvider.js";
 import { LogLevel } from "../util/LogService.js";
 
@@ -11,17 +13,32 @@ export class HomeScreen extends HTMLElement {
   {
     super();
     const root = this.attachShadow({ mode: 'open' });
-    root.innerHTML = `<svg src="../../assets/icon/settings.svg"/>`;
-    var test = new BlobElement("spotify");
-    root.appendChild(test.get());
-     
+    var cssnode = document.createElement('link');
 
-  }
-
-  static getIcons()
-  {
+         cssnode.type = 'text/css';
+         cssnode.rel = 'stylesheet';
+         cssnode.href = './css/blob.css';
+    _logger.debug("searching for blob css: ", cssnode);
+    root.appendChild(cssnode);
+    _logger.info(content);
+    //root.innerHTML = `<img src="${content}"/>`;
+    var settingsElement = document.createElement('img');
+    settingsElement.innerHTML = `<img src="${content}"/>`;
+    var container = document.createElement("div");
+    container.className="container";
+    var spotify = new BlobElement("spotify");
+    var youtube = new BlobElement("youtube");
+    var steam = new BlobElement("steam");
+    container.appendChild(spotify.get());
+    container.appendChild(youtube.get());
+    container.appendChild(steam.get());
+    let temp = spotify.get().cloneNode();
+    var settings = new BlobElement("settings");
+    container.appendChild(settings.get());
+    container.appendChild(temp.cloneNode());
+    container.appendChild(temp.cloneNode());
     
-    
+    root.appendChild(container);
   }
 
   static fuckWithLogger(logLevel:string) : boolean
