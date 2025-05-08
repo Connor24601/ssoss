@@ -1,0 +1,17 @@
+
+# build configs
+.idea/
+node_modules/
+.vscode/
+*.map
+.DS_Store
+../.DS_Store
+.sourcemaps
+
+# Compiled files
+dist/
+src/ts/*/*.js
+ios
+android
+package-lock.json
+vite-config.js
