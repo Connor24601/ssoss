@@ -1,21 +1,25 @@
 import content from "../../assets/icon/settings.svg";
+import { BlobMetaData } from "../blob/BlobMetaData.js";
+import { ContentBlob, WebBlob } from '../blob/ContentBlob.js';
+import { BlobId, BlobType } from "../resources/constants.js";
+import { ServiceProvider } from "../util/ServiceProvider.js";
+const _logger = ServiceProvider.logService.logger;
 
-export class BlobElement
+export class BlobElement extends HTMLElement
 {
-	element!: HTMLElement;
-	id! : string;
 	//get : () => HTMLElement;
+	blob!:ContentBlob;
+	metaData?:BlobMetaData;
 
 
-
-	constructor (id: string)
+	constructor (blob: ContentBlob)
 	{
-		//console.log("I am a blob: ");
-		this.id = id;
-		this.element = document.createElement("blob");
-		this.element.setAttribute("id", id);
+		super();
+		_logger.silly(`instanceation of blob element ${blob.id}`);
+		this.blob = blob;
+		this.id = this.blob.id.commonId ?? this.blob.defaultName;
 		let iconUrl!:string;
-		switch (id) {
+		switch (blob.id.commonId) {
 			case "spotify":
 				iconUrl = "https://raw.githubusercontent.com/EliverLara/candy-icons/87a639d77c4ba47b467c5a45110cc099d4d9fbd1/apps/scalable/spotify-client.svg";
 				break;
@@ -26,18 +30,40 @@ export class BlobElement
 				iconUrl = "https://raw.githubusercontent.com/EliverLara/candy-icons/refs/heads/master/apps/scalable/steam.svg";
 				break;
 			default:
+				_logger.debug(`comId: ${blob.id.commonId}`);
 				break;
 		}
-		this.element.innerHTML = `<img src=\"${iconUrl}\"/>`;
-		if (id=="settings")
+		this.innerHTML = `<img src=\"${iconUrl}\"/>`;
+		if (blob.id.commonId=="settings")
 		{
-			this.element.innerHTML = ``;
+			this.innerHTML = ``;
 		}
+		this.addEventListener("click", this.onClick);
+		this.addEventListener("auxclick", this.onAux);
 	}
 
-	get() : HTMLElement
+	onClick(this:HTMLElement, ev:MouseEvent) : void
 	{
-		return this.element;
+		let blobElement = this as BlobElement;
+		switch(blobElement.blob.type)
+		{
+			case BlobType.web:
+				window.open((blobElement.blob as WebBlob).url); // TODO: replace hard-coding
+				break;
+			case BlobType.internal:
+				break;
+			case BlobType.unknown:
+			default:
+				throw(Error("unimplemented blob type"));
+				break;
+		}
+		
+		
+	}
+	onAux(this:HTMLElement, ev:MouseEvent) : void
+	{
+		let blobElement = this as BlobElement;
+
 	}
 
 }

@@ -11,8 +11,9 @@
   ],
   "scripts": {
     "web": "vite",
-    "android":"npx cap open android",
-    "ios":"npx cap open ios",
+    "host": "vite --host",
+    "android": "npx cap open android",
+    "ios": "npx cap open ios",
     "build": "vite build",
     "preview": "vite preview",
     "sync": "npx cap sync"

@@ -1,29 +1,26 @@
 import './BlobManager'
-import { BlobId, BlobType } from '../resources/constants.js';
+import { BlobId, BlobSource, BlobType } from '../resources/constants.js';
 //import React from 'react';
 
 export class ContentBlob
 {
-
+	type:BlobType = BlobType.unknown;
 	id! : BlobId;
-	redirect?: URL;
 	defaultName!:string;
-	blobType!:BlobType;
+	blobSource!:BlobSource;
 
-	constructor(id: BlobId, redirect: URL, defaultName:string, blobType:BlobType)
+	constructor(id: BlobId, defaultName:string, blobSource:BlobSource=BlobSource.custom)
 	{
 		this.id = id;
-		this.redirect = redirect;
+		//this.redirect = redirect;
 		this.defaultName = defaultName;
 		
-		this.blobType = blobType;
+		this.blobSource = blobSource;
 		return;
 	};
 
-	//string? defaultProfileId // which collab user to use
-	//string defaultName
-	//icon? defaultIcon
-	//BlobType blobType
+	defaultProfileId?:string // which collab user to use
+	//icon?:Icon;
 	
 
 	//Dict<profileId, BlobAuth> BlobAuths
@@ -37,4 +34,17 @@ export class ContentBlob
 	//bool removeCollaborativeUser(profileId)
 	//bool removeAllCollaborativeUsers()
 
+}
+
+// not to be confused with BlobSource.web, which is source JSON location
+export class WebBlob extends ContentBlob {
+	
+	type:BlobType = BlobType.web;
+	url:URL;
+
+	constructor(url:URL, ...superParam: ConstructorParameters<typeof ContentBlob>)
+	{
+		super(...superParam);
+		this.url=url;
+	}
 }

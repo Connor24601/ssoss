@@ -1,5 +1,9 @@
 import { ILogObj, ILogObjMeta, Logger } from "tslog";
 import * as fs from 'fs';
+import { ServiceProvider } from "./ServiceProvider.js";
+import { Constants, StorageLocation } from "../resources/constants.js";
+import { StorageService } from "./StorageService.js";
+import { setInterval } from "timers/promises";
 
 let rfs: Promise<typeof import("rotating-file-stream")>
 if (import.meta.env.SSR)
@@ -26,6 +30,11 @@ export class LogService
 {
     minLogLevel:LogLevel = LogLevel.INFO;
     logger:Logger<ILogObj> = new Logger();
+    storage?:StorageService;
+    batchLogs?:ILogObj[];
+    callback?:number;
+    startupCache?:ILogObj[];
+    logSpamCount:number = 0;
 
     get minLogLevelNum() : number {
         let numLevel=0;
@@ -63,6 +72,68 @@ export class LogService
         this.initializeLogger();
         this.logger.silly("logger constructed");
     }
+
+    attachStorage(location:StorageLocation=StorageLocation.sessionStorage) : boolean {
+        if (this.storage)
+        {
+            this.logger.warn(`storage ${this.storage} already exists, failing to attach`);
+            return false;
+        }
+        this.logger.trace(`starting attempt for attaching transporter to ${location}`);
+        this.storage = ServiceProvider.storage(location);
+        if (!ServiceProvider.storage(location).verifyStorage())
+        {
+            this.logger.warn(`could not verify storage for ${location}`)
+            return false;
+        }
+        this.logger.trace(`storage found: ${location}`);
+        this.storage!.set("logs",[]);
+        this.batchLogs = [];
+        this.batchLogs!.concat(...this.startupCache ?? []);
+        this.startupCache = undefined;
+        this.logger.info(`removing transport ${this.logger.settings.attachedTransports.pop()}`);
+        this.logger.attachTransport((log)=>this.batchLogs?.push(log));
+        if (this.callback)
+        {
+            this.logger.warn("found pre-existing callback!");
+            window.clearInterval(this.callback!);
+        }
+        this.callback = window.setInterval(this.batchStorageTimer,Constants.LOG_STORAGE_TIME * 1000);
+        return true;
+    }
+
+    async batchStorageTimer() : Promise<void>
+    {
+        if (ServiceProvider.logService.batchLogs!.length > 1000)
+        {
+            ServiceProvider.logService.logger.fatal("problem un-batching logs to storage!");
+            window.clearInterval(ServiceProvider.logService.callback!);
+            ServiceProvider.logService.batchLogs = undefined;
+            return;
+        }
+        if (ServiceProvider.logService.batchLogs!.length > 0)
+        {
+            console.log(`preparing to append ${ServiceProvider.logService.batchLogs!.length} logs`);
+            let logList = ServiceProvider.logService.storage!.get<ILogObj[]>("logs");
+            logList!.push(...ServiceProvider.logService.batchLogs!);
+            ServiceProvider.logService.batchLogs! = [];
+            ServiceProvider.logService.storage!.set<ILogObj[]>("logs",logList!);
+            console.log(`${logList!.length} logs stored`);
+            this.logSpamCount = 0;
+        }
+        else {
+            if (this.logSpamCount == 3)
+            {
+                console.trace("no log updates; stopping message spam");
+            }
+            else if (this.logSpamCount < 3)
+            {
+                console.trace("no logs to append");
+            }
+            this.logSpamCount++;
+        }
+        return;
+    }
     
     async initializeLogger() {
         if (!import.meta.env.SSR) {
@@ -73,6 +144,8 @@ export class LogService
                 hideLogPositionForProduction: true,
 
                 overwrite: {
+                    
+
                   transportFormatted: (logMetaMarkup, logArgs, logErrors) => 
                     {
                         // Send different log levels to appropriate console methods
@@ -105,6 +178,8 @@ export class LogService
                     }
                 }
               });
+              this.startupCache = [];
+              this.logger.attachTransport((log:ILogObj)=>this.startupCache?.push(log));
               console.info(`styling logs: ${window.chrome != null}`)
               this.logger.settings.stylePrettyLogs = window.chrome != null;
             return;

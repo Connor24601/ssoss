@@ -1,7 +1,8 @@
 {
   "include": [
     "src",
-    "custom.d.ts"
+    "custom.d.ts",
+    "vite-env.d.ts"
 ],
 
 

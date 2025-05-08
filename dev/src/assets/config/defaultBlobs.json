@@ -1,0 +1,60 @@
+{
+    "blobs":
+    {
+        "youtube": {
+            "redirect":"https://www.youtube.com",
+            "defaultName":"YouTube"
+        },
+        "spotify": {
+
+        },
+        "netflix": {
+            "redirect":"",
+            "defaultName":""
+        },
+        "settings": {
+            "defaultName":"Settings"
+        },
+        "hulu": {
+            "redirect":"",
+            "defaultName":""
+        },
+        "disneyPlus": {
+            "redirect":"",
+            "defaultName":""
+        },
+        "amazonPrime": {
+            "redirect":"",
+            "defaultName":""
+        },
+        "googlePlay": {
+            "redirect":"",
+            "defaultName":""
+        },
+        "youtubeMusic": {
+            "redirect":"",
+            "defaultName":""
+        },
+        "plex": {
+            "redirect":"",
+            "defaultName":""
+        },
+        "hboMax": {
+            "redirect":"",
+            "defaultName":""
+        },
+        "paramountPlus": {
+            "redirect":"",
+            "defaultName":""
+        },
+        "peacock": {
+            "redirect":"",
+            "defaultName":""
+        },
+        "appleMusic": {
+            "redirect":"",
+            "defaultName":""
+        }
+
+    }
+}

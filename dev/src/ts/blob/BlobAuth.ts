@@ -1,4 +1,4 @@
-class BlobAuth
+export class BlobAuth
 {
 	// variables
 	//string username

@@ -1,3 +1,4 @@
+import { StorageLocation } from "../resources/constants.js";
 import { ServiceProvider } from "./ServiceProvider.js";
 // LogService and StorageService require each other, 
 // so don't use the ServiceProvider
@@ -6,13 +7,26 @@ import { ServiceProvider } from "./ServiceProvider.js";
 export class StorageService
 {
     hasStorage:boolean;
-    storeLocation:string;
+    storeLocation:StorageLocation;
     _logger = ServiceProvider.logService.logger;
+    webStorage?:Storage;
 
-    constructor(location:string="localStorage")
+    constructor(location:StorageLocation=StorageLocation.localStorage)
     {
         this.storeLocation = location;
-        this.hasStorage = this.storageAvailable(this.storeLocation);
+        switch (location) {
+            case StorageLocation.localStorage:
+                this.webStorage = localStorage;
+                break;
+            case StorageLocation.sessionStorage:
+                this.webStorage = sessionStorage;
+                break;
+            default:
+                this._logger.error(`unimplemented storage option: ${location}`);
+                break;
+        }
+        this.hasStorage = this.storageAvailable();
+        this._logger.debug(`storage created: ${this.storeLocation}: ${this.webStorage}`);
     }
     
     set<type>(name:string, value:type) : boolean
@@ -25,7 +39,7 @@ export class StorageService
                 throw ReferenceError(`no ${this.storeLocation}, cannot attempt storing ${name}`);
             }
             let serializedValue = JSON.stringify(value);
-            localStorage.setItem(name,serializedValue);
+            this.webStorage?.setItem(name,serializedValue);
             isSuccessful = true;
             
         } catch (error) {
@@ -46,14 +60,17 @@ export class StorageService
                 this._logger.trace(`no ${this.storeLocation} exists, cannot get ${name}`);
                 throw ReferenceError(`no ${this.storeLocation}, cannot attempt retrieval of ${name}`);
             }
-            let raw:string | null = localStorage.getItem(name);
+            let raw:string | null = this.webStorage?.getItem(name) || null;
             if (raw == null)
             {
                 this._logger.trace(`no value found for ${name} in ${this.storeLocation}, throwing up`);
                 throw ReferenceError(`${name} not found in ${this.storeLocation}`);
             }
             returnObject = JSON.parse(raw) as type;
-            this._logger.trace(`successful retrieval of ${name}`);
+            if (name != "logs")
+            {
+                this._logger.trace(`successful retrieval of ${name}`);
+            }
         } catch (error) {
             this._logger.error(`error getting ${name} from ${this.storeLocation}`, error);
         }
@@ -62,29 +79,40 @@ export class StorageService
         }
     }
 
-    retryStorage()
+    verifyStorage() : boolean
     {
-        this.hasStorage = this.storageAvailable(this.storeLocation);
+        this.hasStorage = this.storageAvailable();
+        return this.hasStorage;
     }
 
-    storageAvailable(type:string) {
+    storageAvailable() : boolean {
         try 
         {
-            this._logger.trace(`testing ${type} storage`);
+            this._logger.trace(`testing ${this.storeLocation} storage`);
             const x = "__storage_test__";
-            localStorage.setItem(x, x);
-            localStorage.removeItem(x);
+            switch (this.storeLocation) {
+                case StorageLocation.localStorage:
+                case StorageLocation.sessionStorage:
+                    this.webStorage!.setItem(x, x);
+                    this.webStorage!.removeItem(x);
+                    break;
+                default:
+                    //TODO: implement file storage
+                    throw(Error("Not implemented"));
+                    return false;
+            }
+            
             return true;
         } 
         catch (e)
         {
-            this._logger.warn(`failure with ${type} storage:`,e);
+            this._logger.warn(`failure with ${this.storeLocation} storage:`,e);
             return (
                 e instanceof DOMException &&
                 e.name === "QuotaExceededError" &&
                 // acknowledge QuotaExceededError only if there's something already stored
-                localStorage &&
-                localStorage.length !== 0
+                this.webStorage &&
+                this.webStorage.length !== 0  || false
             );
         }
       }

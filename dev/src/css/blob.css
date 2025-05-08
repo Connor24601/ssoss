@@ -26,7 +26,7 @@
 	
 }
 
-blob
+blob-element
 {
 	background-image: linear-gradient(#606060,#202020 );
 	text-align: center;
@@ -47,10 +47,10 @@ blob
 	margin: 1em;
 
 	outline: .2em;
-	outline-color: #111111;
+	outline-color: #11111100;
 	outline-style: solid;
 }
-blob:hover
+blob-element:hover
 {
 	outline-color: #AAAAAA;
 	margin: 0.5em;
@@ -59,7 +59,7 @@ blob:hover
 	transition: height 0.5s, max-height 0.5s, min-height 0.5s, margin 0.5s;
 }
 
-blob:active
+blob-element:active
 {
 	outline-color: #FFFFFF;
 	background-image: linear-gradient(#707070,#707070 );
@@ -77,21 +77,11 @@ img
 
 /*0 0/calc(100% - 5px) calc(100% - 5px), prevents outline from being masked away*/
 #settings {
+	background-image: linear-gradient(#606060,#202020 ), url("../assets/icon/settings.svg");
+	mask: url("../assets/icon/settings.svg");
+	-webkit-mask: url("../assets/icon/settings.svg");
+	-webkit-mask-clip: no-clip;
 	mask-type: alpha;
-	mask: conic-gradient(from 90deg at 5px 5px,#0000 25%,#000 0) 
-    0 0/calc(100% - 5px) calc(100% - 5px),
-		url("../assets/icon/settings.svg");
-	-webkit-mask:
-	conic-gradient(from 90deg at 1em 1em,#0000 25%,#000 0) 
-    0 0/calc(100% - 1em) calc(100% - 1em),
-		url("../assets/icon/settings.svg");
-	mask-size: 100%;
-	mask-border: none;
-	mask-repeat: no-repeat;
+	mask-clip: no-clip;
 }
 
-#settings::after {
-	mask-border: unset;
-	outline-color: red;
-	outline-width: 5em;
-}

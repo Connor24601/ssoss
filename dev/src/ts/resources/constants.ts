@@ -1,24 +1,42 @@
 import { v4 as uuid } from 'uuid';
 
-class Constants
+export class Constants
 {
-	
+	static  LOG_STORAGE_TIME = 30; // time in seconds to store batches of logs in web mode
+}
+
+export enum BlobSource
+{
+    default = "DEFAULT", // default blobs; not mutable
+    custom = "CUSTOM", // blobs that the user has made
+    web = "WEB", // blobs whose definitions are stored online
+    imported = "IMPORTED" // blobs downloaded from online
 }
 
 export enum BlobType
 {
-    default = "DEFAULT",
-    custom = "CUSTOM",
-    web = "WEB",
-    imported = "IMPORTED"
+    web="WEB",
+    internal="INTERNAL",
+    script="SCRIPT",
+    local="LOCAL",
+    unknown="UNKNOWN"
+}
+
+export enum StorageLocation {
+    
+    localStorage = "localStorage",
+    sessionStorage = "sessionStorage",
+    fileStorage = "fileStorage"
 }
 
 export class BlobId
 {
     id!:string;
+    commonId?:string;
 
-	constructor()
+	constructor(commonId?:string)
     {
+        this.commonId = commonId;
         this.id = uuid();
     }
 }
