@@ -14,7 +14,7 @@ export class BlobMetaData
 	defaultProfileId?:string;
 	skipUserPrompt:boolean = false;
 	
-	//bool? skipCollabPrompt // "which user would you like to log in as"
+	//bool? skipCollabPrompt // ignores : which user would you like to log in as prompt
 	//Bool? isHidden
 }
 

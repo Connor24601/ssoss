@@ -1,12 +1,11 @@
-## Created with Capacitor Create App
+## SSOSS
 
-This app was created using [`@capacitor/create-app`](https://github.com/ionic-team/create-capacitor-app),
-and comes with a very minimal shell for building an app.
+Streaming Service One Stop Shop
+Some Shitty Open Source Software
+Streaming Service Organization System Site
+Super Slim Operating System Substitute
+Slim Shady's Own Streaming Service
+Sloppy Sub-Optimal Screen Software
 
-### Running this example
+This capacitor/electron native and web app is intended to be used as an alternative to any TV operating system.
 
-To run the provided example, you can use `npm start` command.
-
-```bash
-npm start
-```

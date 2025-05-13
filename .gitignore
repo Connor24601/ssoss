@@ -5,7 +5,6 @@ node_modules/
 .vscode/
 *.map
 .DS_Store
-../.DS_Store
 .sourcemaps
 
 # Compiled files
@@ -14,4 +13,4 @@ src/ts/*/*.js
 ios
 android
 package-lock.json
-vite-config.js
+vite.config.js

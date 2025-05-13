@@ -10,6 +10,7 @@ export class BlobElement extends HTMLElement
 	//get : () => HTMLElement;
 	blob!:ContentBlob;
 	metaData?:BlobMetaData;
+	scale:number=1;
 
 
 	constructor (blob: ContentBlob)
@@ -36,33 +37,29 @@ export class BlobElement extends HTMLElement
 		this.innerHTML = `<img src=\"${iconUrl}\"/>`;
 		if (blob.id.commonId=="settings")
 		{
-			this.innerHTML = ``;
+			this.innerHTML = `<img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" width="0" height="0" alt="" />`;
 		}
-		this.addEventListener("click", this.onClick);
 		this.addEventListener("auxclick", this.onAux);
+		
+		this.tabIndex=0;
 	}
 
-	onClick(this:HTMLElement, ev:MouseEvent) : void
+	setScale(scale:number)
 	{
-		let blobElement = this as BlobElement;
-		switch(blobElement.blob.type)
-		{
-			case BlobType.web:
-				window.open((blobElement.blob as WebBlob).url); // TODO: replace hard-coding
-				break;
-			case BlobType.internal:
-				break;
-			case BlobType.unknown:
-			default:
-				throw(Error("unimplemented blob type"));
-				break;
-		}
-		
+		this.scale = scale;
+		this.style.scale = `${this.scale}`;
+	}
+	inspect() : void
+	{
 		
 	}
+
 	onAux(this:HTMLElement, ev:MouseEvent) : void
 	{
+		_logger.info("aux");
+		
 		let blobElement = this as BlobElement;
+		blobElement.inspect();
 
 	}
 

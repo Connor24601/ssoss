@@ -1,6 +1,8 @@
 import './BlobManager'
 import { BlobId, BlobSource, BlobType } from '../resources/constants.js';
+import { ServiceProvider } from '../util/ServiceProvider.js';
 //import React from 'react';
+const _logger = ServiceProvider.logService.logger;
 
 export class ContentBlob
 {
@@ -22,6 +24,7 @@ export class ContentBlob
 	defaultProfileId?:string // which collab user to use
 	//icon?:Icon;
 	
+
 
 	//Dict<profileId, BlobAuth> BlobAuths
 	//Set<profileId>? CollaborativeBlobUsers

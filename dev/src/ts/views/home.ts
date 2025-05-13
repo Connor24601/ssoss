@@ -6,30 +6,30 @@ import { ServiceProvider } from "../util/ServiceProvider.js";
 import { LogLevel } from "../util/LogService.js";
 import { BlobId, BlobSource } from "../resources/constants.js";
 import { ContentBlob, WebBlob } from "../blob/ContentBlob.js";
+import { Search } from "./search.js";
+import { BackgroundSVG } from "../resources/background.js";
 
 const _logger = ServiceProvider.logService.logger;
 
 export class HomeScreen extends HTMLElement {
-  static testNum:number = 5;
+
+
+  blobGrid:ContentBlob[][] = [];
+  
   constructor()
   {
     super();
-    const root = this.attachShadow({ mode: 'open' });
-    var cssnode = document.createElement('link');
-
-         cssnode.type = 'text/css';
-         cssnode.rel = 'stylesheet';
-         cssnode.href = './css/blob.css';
-    _logger.debug("searching for blob css: ", cssnode);
-    root.appendChild(cssnode);
-    _logger.info(content);
-    //root.innerHTML = `<img src="${content}"/>`;
-    var settingsElement = document.createElement('img');
-    settingsElement.innerHTML = `<img src="${content}"/>`;
     var container = document.createElement("div");
     container.className="container";
+    try {
+      let background = new BackgroundSVG();
+      this.appendChild(background.background);
+      _logger.info("successful adding svg background");
+    } catch (error) {
+      _logger.error("failure adding background:", error);
+    }
     
-    
+  
 
     ServiceProvider.blobService.addBlob(new 
       WebBlob(new URL("/","https://www.youtube.com"),new BlobId("youtube"),"YouTube",BlobSource.default));
@@ -53,8 +53,34 @@ export class HomeScreen extends HTMLElement {
     var settings = new BlobElement(ServiceProvider.blobService.getBlobByCommonId("settings")!);
     container.appendChild(settings);
     
-    root.appendChild(container);
+    this.appendChild(new Search());
+    this.appendChild(container);
   }
+  setUpListeners() : void
+  {
+    this.addEventListener('keydown', event => {
+      
+      if (event.key.toLowerCase()=="enter")
+      {
+        // launch selected blob
+      }
+      else if (event.key.toLowerCase()=="escape")
+      {
+        // unfocus selected blob
+      }
+      else if (event.key.toLowerCase()=="space")
+      {
+        // inspect blob
+      }
+      else if (event.key.toLowerCase().startsWith("arrow"))
+      {
+        // TODO: navigate grid via arrows
+      }
+      
+    });
+  }
+
+
 
   static fuckWithLogger(logLevel:string) : boolean
   {

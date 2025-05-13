@@ -53,7 +53,6 @@ export class BlobManager
 		return null;
 	}
 	
-	
 
 	// methods
 	// addBlob()

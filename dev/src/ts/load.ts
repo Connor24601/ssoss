@@ -1,9 +1,11 @@
+import { BackgroundSVG } from "./resources/background.js";
 import { StorageLocation } from "./resources/constants.js";
 import { LogLevel } from "./util/LogService.js";
 import { ServiceProvider } from "./util/ServiceProvider.js";
 import { BlobElement } from "./views/blobElement.js";
 import { HomeScreen } from "./views/home.js";
 import { InputHandler } from "./views/input.js";
+import { Search } from "./views/search.js";
 
 const _logger = ServiceProvider.logService.logger;
 
@@ -47,6 +49,8 @@ try {
         window.customElements.define('blob-element', BlobElement);
         _logger.debug("blob defined");
         window.customElements.define('home-screen', HomeScreen);
+        //window.customElements.define('anim-background', BackgroundSVG);
+        window.customElements.define('search-bar', Search);
         
     } catch (error) {
         _logger.fatal(`couldn't define custom elements: ${error}`, error);

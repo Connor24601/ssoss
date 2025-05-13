@@ -17,13 +17,13 @@ p {
     align-items: flex-start;
     align-self: end;
     overscroll-behavior-x: contain;
-    background-color: #33333366;
+    background-color: #333333BB;
     border-radius: 25px;
-    padding: 20px 50px 5px 20px;
-    margin: 5px;
+    padding: 10px 5px 0px 10px;
+    margin: 2px;
 }
 body {
-    background-image: linear-gradient(#110600,#060611 );
+    background-image: linear-gradient(#060611,#200606 );
     background-attachment: fixed;
     text-align: center;
     flex:1;
@@ -40,6 +40,13 @@ main {
     max-width:100%;
     flex: 1;
 
+}
+
+#background
+{
+    position: fixed;
+    display:flow-root;
+    z-index: -1;
 }
 
 html
@@ -63,49 +70,72 @@ footer
     right: 10px;
     position: fixed;
     display:flow-root;
-
 }
-
+home-screen
+{
+  height: 100%;
+  width: 100%;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+}
 
 .toggle {
     position: relative;
     display: inline-block;
     width: 60px;
     height: 34px;
-  }
+}
+
+.toggle input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #333;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: #FFF;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #048;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+#search {
+  margin-top: 10px;
+  font-size:1.5em;
+  background-color: #202020;
+  border: 5px;
+  border-color:#606060;
+  color: #FFFFFF;
+  border-radius: 20px;
+  padding: 5px 15px;
+  font-family: oxygen;
   
-  .toggle input {
-    display: none;
-  }
-  
-  .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #333;
-    transition: 0.4s;
-    border-radius: 34px;
-  }
-  
-  .slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: #FFF;
-    transition: 0.4s;
-    border-radius: 50%;
-  }
-  
-  input:checked + .slider {
-    background-color: #048;
-  }
-  
-  input:checked + .slider:before {
-    transform: translateX(26px);
-  }
+}
+#search:focus
+{
+  background-color: #202020;
+}
