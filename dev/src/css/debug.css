@@ -1,0 +1,13 @@
+pseudo-blob
+{
+    outline-style: dashed;
+    outline-color: orange;
+}
+footer {
+    outline-style: dashed;
+    outline-color: orange;
+}
+.container {
+    outline-color: red;
+    outline-style: dashed;
+}

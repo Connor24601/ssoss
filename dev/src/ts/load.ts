@@ -5,9 +5,10 @@ import { ServiceProvider } from "./util/ServiceProvider.js";
 import { BlobElement } from "./views/blobElement.js";
 import { HomeScreen } from "./views/home.js";
 import { InputHandler } from "./views/input.js";
+import { Panel } from "./views/panel.js";
 import { Search } from "./views/search.js";
 
-const _logger = ServiceProvider.logService.logger;
+const _logger = ServiceProvider.logService.logger.getSubLogger({name:"Load"});
 
 try {
 
@@ -33,6 +34,7 @@ try {
     if (import.meta.env.DEV)
     {
         ServiceProvider.logService.changeLogLevel(LogLevel.TRACE);
+        
     }
     else
     {
@@ -49,7 +51,7 @@ try {
         window.customElements.define('blob-element', BlobElement);
         _logger.debug("blob defined");
         window.customElements.define('home-screen', HomeScreen);
-        //window.customElements.define('anim-background', BackgroundSVG);
+        window.customElements.define('panel-popup', Panel);
         window.customElements.define('search-bar', Search);
         
     } catch (error) {
@@ -67,7 +69,17 @@ try {
         _logger.debug("document loaded");
         const inputHandler = new InputHandler();
         document.getElementById("main")?.appendChild(new HomeScreen());
-        
+        if (import.meta.env.DEV)
+        {
+            let debugCss = document.createElement("link");
+            debugCss.href = "./css/debug.css";
+            debugCss.rel = "stylesheet";
+
+            debugCss.type = "text/css";
+            
+            var head  = document.getElementsByTagName('head')[0];
+            head.appendChild(debugCss);
+        }
 
     });
 

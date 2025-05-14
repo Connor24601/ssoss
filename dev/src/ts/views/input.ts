@@ -1,7 +1,7 @@
 import { ProfileId } from "../resources/constants.js";
 import {Keyboard} from "./keyboard.js";
 import { ServiceProvider } from "../util/ServiceProvider.js";
-const _logger = ServiceProvider.logService.logger;
+const _logger = ServiceProvider.logService.logger.getSubLogger({name:"input"});
 
 class InputSettings 
 {

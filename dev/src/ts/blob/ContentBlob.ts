@@ -2,7 +2,7 @@ import './BlobManager'
 import { BlobId, BlobSource, BlobType } from '../resources/constants.js';
 import { ServiceProvider } from '../util/ServiceProvider.js';
 //import React from 'react';
-const _logger = ServiceProvider.logService.logger;
+const _logger = ServiceProvider.logService.logger.getSubLogger({name:"Blob"});
 
 export class ContentBlob
 {
@@ -10,6 +10,7 @@ export class ContentBlob
 	id! : BlobId;
 	defaultName!:string;
 	blobSource!:BlobSource;
+	defaultProfileId?:string // which collab user to use
 
 	constructor(id: BlobId, defaultName:string, blobSource:BlobSource=BlobSource.custom)
 	{
@@ -21,7 +22,12 @@ export class ContentBlob
 		return;
 	};
 
-	defaultProfileId?:string // which collab user to use
+
+	activate()
+	{
+		_logger.info(`activated blob with no override: ${this.defaultName}`);
+	}
+	
 	//icon?:Icon;
 	
 
@@ -49,5 +55,27 @@ export class WebBlob extends ContentBlob {
 	{
 		super(...superParam);
 		this.url=url;
+	}
+	
+	override activate()
+	{
+		window.open(this.url);
+	}
+}
+
+export class ControlBlob extends ContentBlob {
+	override type:BlobType=BlobType.internal;
+	// special class for blobs that cannot be removed/have special hard-coded behaviors, like settings/add/etc
+	constructor( ...superParam: ConstructorParameters<typeof ContentBlob>)
+	{
+		super(...superParam);
+	}
+	altActivate() : void
+	{
+		//occurs on right-click of special blob
+	}
+	dismiss() : void
+	{
+
 	}
 }

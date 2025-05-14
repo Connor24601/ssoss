@@ -1,6 +1,7 @@
 
 export class Search extends HTMLElement
 {
+    onlineSearch:boolean=false;
     input!:HTMLInputElement;
     constructor()
     {

@@ -8,7 +8,7 @@ export class StorageService
 {
     hasStorage:boolean;
     storeLocation:StorageLocation;
-    _logger = ServiceProvider.logService.logger;
+    _logger = ServiceProvider.logService.logger.getSubLogger({name:"StorageService"});
     webStorage?:Storage;
 
     constructor(location:StorageLocation=StorageLocation.localStorage)

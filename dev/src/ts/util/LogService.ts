@@ -31,7 +31,7 @@ export class LogService
     minLogLevel:LogLevel = LogLevel.INFO;
     logger:Logger<ILogObj> = new Logger();
     storage?:StorageService;
-    batchLogs?:ILogObj[];
+    batchLogs?:any[];
     callback?:number;
     startupCache?:ILogObj[];
     logSpamCount:number = 0;
@@ -73,6 +73,16 @@ export class LogService
         this.logger.silly("logger constructed");
     }
 
+    basicJSON(log:any) : any
+    {
+        let json = log as any;
+        json.dateTime = log._meta.date;
+        json.logLevel = log._meta.logLevelId;
+        json.name = log._meta.name;
+        delete json._meta;
+        return json;
+    }
+
     attachStorage(location:StorageLocation=StorageLocation.sessionStorage) : boolean {
         if (this.storage)
         {
@@ -89,10 +99,25 @@ export class LogService
         this.logger.trace(`storage found: ${location}`);
         this.storage!.set("logs",[]);
         this.batchLogs = [];
-        this.batchLogs!.concat(...this.startupCache ?? []);
+        //console.log("concat startupCache:",this.startupCache);
+        if (this.startupCache && this.startupCache?.length > 1)
+        {
+            let metaLog = {} as any;
+            let meta = this.startupCache[0]._meta as any;
+            metaLog.dateTime = meta.date;
+            metaLog.logLevel = meta.logLevelId;
+            metaLog.name = "meta";
+            metaLog[0] = JSON.stringify(meta);
+            
+            this.batchLogs!.push(metaLog);
+            this.batchLogs!.push(...this.startupCache!.map((log)=>this.basicJSON(log)));
+        }
+        //this.batchLogs!.push(...this.startupCache ?? []);
+        //console.log("concat startupCache:",this.batchLogs);
         this.startupCache = undefined;
         this.logger.info(`removing transport ${this.logger.settings.attachedTransports.pop()}`);
-        this.logger.attachTransport((log)=>this.batchLogs?.push(log));
+        this.logger.attachTransport((log)=>this.batchLogs?.push(this.basicJSON(log))
+        );
         if (this.callback)
         {
             this.logger.warn("found pre-existing callback!");
@@ -139,6 +164,7 @@ export class LogService
         if (!import.meta.env.SSR) {
             this.logger.warn("running in server mode");
             this.logger = new Logger({
+                name: "LogService",
                 minLevel: this.minLogLevelNum,
                 type: "pretty",
                 hideLogPositionForProduction: true,

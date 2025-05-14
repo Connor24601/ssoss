@@ -12,67 +12,80 @@
 
 
 .container {
-	padding-top: 5%;
-	padding-left:5%;
-	display: grid;
-	width: 90%;
-	height: 90%;
+	padding: 1em;
+	
+	display: flex;
+	position:fixed;
+	right:10px;
+	left:10px;
+	top:8em;
+	bottom:2em;
 	gap: .1em;
 	grid-template-rows: repeat(auto-fill, minmax(10em,13em));
 	grid-template-columns: repeat(auto-fill, minmax(10em,13em));
 	
-	grid-auto-rows: 90%;
-	grid-auto-columns:90%;
-	align-self: center;
-	align-items: center;
-  	justify-content: center;
-	justify-self:center;
+	grid-auto-rows: 70%;
+	grid-auto-columns:70%;
+	align-self: stretch;
 }
+
+pseudo-blob
+{
+	padding: .5em;
+
+	display: flex;
+	height: 11em;
+	align-content: center;
+	align-items: center;
+	background-color: transparent;
+}
+
 
 blob-element
 {
 	background-image: linear-gradient(#606060,#202020 );
+	background-repeat: no-repeat;
 	text-align: center;
-	border-radius: 20%;
+	border-radius: 25%;
+	
 	aspect-ratio: 1;
-	padding: 2%;
+	padding: 1em;
+	
 
-	display: flex;
-	height: 10em;
-	max-height: 10em;
+	display: inline-block;
+	max-height: 6em;
 	
 	align-content: center;
 	align-items: center;
 
-	border-width: 1em;
+	
 	transition: height 0.5s, max-height 0.5s, min-height 0.5s, margin 0.5s;
 
 	margin: 1em;
-
-	outline: .2em;
-	outline-color: #11111100;
-	outline-style: solid;
+	border-width: .3em;
+	border-color: inherit;
+	border-style: solid;
 }
 blob-element:hover
 {
-	outline-color: #AAAAAA;
+	border-color: #AAAAAA;
 	margin: 0.5em;
-	height: 11em;
-	max-height: 11em;
+	height: 7em;
+	max-height: 7em;
 	transition: height 0.5s, max-height 0.5s, min-height 0.5s, margin 0.5s;
 }
 blob-element:focus
 {
-	outline-color: #AAAAAA;
+	border-color: #AAAAAA;
 	margin: 0.5em;
-	height: 11em;
-	max-height: 11em;
+	height: 7em;
+	max-height: 7em;
 	transition: height 0.5s, max-height 0.5s, min-height 0.5s, margin 0.5s;
 }
 
 blob-element:active
 {
-	outline-color: #FFFFFF;
+	border-color: #FFFFFF;
 	background-image: linear-gradient(#707070,#707070 );
 }
 
@@ -81,18 +94,22 @@ img
 {
 	
     object-fit: contain;
-    width: 80%;
-    height: 80%;
-    padding: 10%;
+    width: 90%;
+    height: 90%;
+    padding: 5%;
 }
 
 /*0 0/calc(100% - 5px) calc(100% - 5px), prevents outline from being masked away*/
+/*radial-gradient(transparent 70%, transparent 76%)*/
 #settings {
-	background-image: linear-gradient(#606060,#202020 ), url("../assets/icon/settings.svg");
+	background-image: linear-gradient(#606060,#202020 );
 	mask: url("../assets/icon/settings.svg");
 	-webkit-mask: url("../assets/icon/settings.svg");
 	-webkit-mask-clip: no-clip;
 	mask-type: alpha;
 	mask-clip: no-clip;
+	background-repeat: no-repeat;
+	mask-border-repeat: stretch;
+	mask-repeat: no-repeat;
 }
 

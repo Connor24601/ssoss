@@ -5,7 +5,7 @@ import { ContentBlob } from "./ContentBlob.js";
 
 export class BlobManager
 {
-	_logger = ServiceProvider.logService.logger;
+	_logger = ServiceProvider.logService.logger.getSubLogger({name:"BlobManager"});
 	activeBlobs:Map<BlobId,ContentBlob> =  new Map<BlobId,ContentBlob>();
 	
 	blobStorage:Map<BlobSource,StorageLocation> =  new Map<BlobSource,StorageLocation>();

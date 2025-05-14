@@ -1,6 +1,6 @@
 import { ServiceProvider } from "../util/ServiceProvider.js";
 
-const _logger = ServiceProvider.logService.logger;
+const _logger = ServiceProvider.logService.logger.getSubLogger({name:"BackgroundSVG"});
 export class BackgroundSVG
 {
     background:SVGElement;
@@ -14,8 +14,6 @@ export class BackgroundSVG
         this.background.setAttribute("id","background");
         this.setSize();
         this.createDot();
-        _logger.info("circle:",this.circle);
-        //this.background.appendChild(this.circle);
         this.generateDots(300);
 
     }
@@ -39,7 +37,6 @@ export class BackgroundSVG
         anim.setAttribute("dur","10s");
         anim.setAttribute("repeatCount","indefinite");
         this.circle.appendChild(anim);
-        _logger.info("anim:",this.circle.firstChild);
 
     }
     generateDots(count:number)
@@ -63,7 +60,7 @@ export class BackgroundSVG
             doubleanim.setAttribute('attributeName','fill');
             doubleanim.setAttribute("from",`#FF${g}${b}${opacity}`);
             doubleanim.setAttribute("to",`#FF${g}${b}00`);
-            _logger.info(`new circle with delay: ${anim.getAttribute("begin")} and dur: ${anim.getAttribute("dur")}`)
+            
             circle.appendChild(anim);
             circle.appendChild(doubleanim);
             this.background.appendChild(circle);

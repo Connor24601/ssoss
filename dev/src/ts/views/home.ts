@@ -1,15 +1,15 @@
 import { BlobElement } from "./blobElement.js";
-import content from "../../assets/icon/settings.svg";
 
 
 import { ServiceProvider } from "../util/ServiceProvider.js";
 import { LogLevel } from "../util/LogService.js";
 import { BlobId, BlobSource } from "../resources/constants.js";
-import { ContentBlob, WebBlob } from "../blob/ContentBlob.js";
+import { ContentBlob, ControlBlob, WebBlob } from "../blob/ContentBlob.js";
 import { Search } from "./search.js";
 import { BackgroundSVG } from "../resources/background.js";
+import { Panel } from "./panel.js";
 
-const _logger = ServiceProvider.logService.logger;
+const _logger = ServiceProvider.logService.logger.getSubLogger({name:"home"});
 
 export class HomeScreen extends HTMLElement {
 
@@ -23,7 +23,7 @@ export class HomeScreen extends HTMLElement {
     container.className="container";
     try {
       let background = new BackgroundSVG();
-      this.appendChild(background.background);
+      //this.appendChild(background.background);
       _logger.info("successful adding svg background");
     } catch (error) {
       _logger.error("failure adding background:", error);
@@ -41,7 +41,7 @@ export class HomeScreen extends HTMLElement {
         ContentBlob(new BlobId("steam"),"Steam",BlobSource.default));
     
       ServiceProvider.blobService.addBlob(new 
-        ContentBlob(new BlobId("settings"),"Settings",BlobSource.default));
+        ControlBlob(new BlobId("settings"),"Settings",BlobSource.default));
     var spotify = new BlobElement(ServiceProvider.blobService.getBlobByCommonId("spotify")!);
     
     var youtube = new BlobElement(ServiceProvider.blobService.getBlobByCommonId("youtube")!);
@@ -53,7 +53,8 @@ export class HomeScreen extends HTMLElement {
     var settings = new BlobElement(ServiceProvider.blobService.getBlobByCommonId("settings")!);
     container.appendChild(settings);
     
-    this.appendChild(new Search());
+    //this.appendChild(new Search());
+    //this.appendChild(new Panel());
     this.appendChild(container);
   }
   setUpListeners() : void
