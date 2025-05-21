@@ -1,6 +1,6 @@
 import { ServiceProvider } from "../util/ServiceProvider.js";
 
-const _logger = ServiceProvider.logService.logger.getSubLogger({name:"BackgroundSVG"});
+const _logger = ServiceProvider.logService.createNewLogger("BackgroundSVG");
 export class BackgroundSVG
 {
     background:SVGElement;

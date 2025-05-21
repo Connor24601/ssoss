@@ -2,7 +2,8 @@ import { v4 as uuid } from 'uuid';
 
 export class Constants
 {
-	static  LOG_STORAGE_TIME = 30; // time in seconds to store batches of logs in web mode
+	static LOG_STORAGE_TIME = 30; // time in seconds to store batches of logs in web mode
+    static yesKeyCodes=new Set<string>(["submit","space","enter","yes","activate","return"]);
 
     static rgba(r:number,g:number,b:number,a:number) : string
     {

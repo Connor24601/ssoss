@@ -35,6 +35,7 @@ export class LogService
     callback?:number;
     startupCache?:ILogObj[];
     logSpamCount:number = 0;
+    children:Map<string,Logger<ILogObj>> = new Map<string,Logger<ILogObj>>();
 
     get minLogLevelNum() : number {
         let numLevel=0;
@@ -56,6 +57,25 @@ export class LogService
                 break;
         }
         return numLevel;
+    }
+
+    createNewLogger(name:string) : Logger<ILogObj>
+    {
+        try
+        {
+            if (this.children.has(name))
+            {
+                throw Error(`Already defined: ${name}`);
+            }
+            const newLogger = this.logger.getSubLogger(({name:name}));
+            this.children.set(name,newLogger);
+            return newLogger;
+        }
+        catch (error)
+        {
+            this.logger.error("error creating logger, sending self instead",error);
+            return this.logger;
+        }
     }
 
     changeLogLevel(newLevel:LogLevel)
@@ -116,7 +136,9 @@ export class LogService
         //console.log("concat startupCache:",this.batchLogs);
         this.startupCache = undefined;
         this.logger.info(`removing transport ${this.logger.settings.attachedTransports.pop()}`);
-        this.logger.attachTransport((log)=>this.batchLogs?.push(this.basicJSON(log))
+        this.logger.attachTransport((log)=>this.batchLogs?.push(this.basicJSON(log)));
+        this.children.forEach((value:Logger<ILogObj>,key:string)=> 
+            value.attachTransport((log)=>this.batchLogs?.push(this.basicJSON(log)))
         );
         if (this.callback)
         {

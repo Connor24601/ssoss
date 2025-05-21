@@ -8,7 +8,7 @@ import { Profile } from "./Profile.js";
 
 export class ProfileManager
 {
-    _logger = ServiceProvider.logService.logger.getSubLogger({name:"ProfileManager"});
+    _logger = ServiceProvider.logService.createNewLogger("ProfileManager");
     collaborativeProfile!:Profile;
     
     constructor() {

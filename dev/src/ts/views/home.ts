@@ -7,9 +7,9 @@ import { BlobId, BlobSource } from "../resources/constants.js";
 import { ContentBlob, ControlBlob, WebBlob } from "../blob/ContentBlob.js";
 import { Search } from "./search.js";
 import { BackgroundSVG } from "../resources/background.js";
-import { Panel } from "./panel.js";
+import { Panel } from "./components/panel.js";
 
-const _logger = ServiceProvider.logService.logger.getSubLogger({name:"home"});
+const _logger = ServiceProvider.logService.createNewLogger("home");
 
 export class HomeScreen extends HTMLElement {
 

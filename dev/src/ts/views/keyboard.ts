@@ -1,5 +1,5 @@
 import { ServiceProvider } from "../util/ServiceProvider.js";
-const _logger = ServiceProvider.logService.logger.getSubLogger({name:"keyboard"});
+const _logger = ServiceProvider.logService.createNewLogger("keyboard");
 class Key  {
 
 	isDown: boolean = false;

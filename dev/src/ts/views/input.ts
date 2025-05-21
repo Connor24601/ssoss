@@ -1,7 +1,7 @@
 import { ProfileId } from "../resources/constants.js";
 import {Keyboard} from "./keyboard.js";
 import { ServiceProvider } from "../util/ServiceProvider.js";
-const _logger = ServiceProvider.logService.logger.getSubLogger({name:"input"});
+const _logger = ServiceProvider.logService.createNewLogger("input");
 
 class InputSettings 
 {
@@ -34,7 +34,7 @@ export class InputHandler
       _logger.trace("creating input panel");
       const radius:number = 10;
       this.inputPanel = document.getElementById("inputContainer")!;
-      this.inputBlockToggle = document.getElementById("btnToggle")! as HTMLInputElement;
+      this.inputBlockToggle = document.getElementById("inputToggle")! as HTMLInputElement;
       _logger.silly("inputPanel initialized");
       this.getKeyboard();
   }

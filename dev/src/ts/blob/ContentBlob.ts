@@ -1,8 +1,9 @@
 import './BlobManager'
 import { BlobId, BlobSource, BlobType } from '../resources/constants.js';
 import { ServiceProvider } from '../util/ServiceProvider.js';
-//import React from 'react';
-const _logger = ServiceProvider.logService.logger.getSubLogger({name:"Blob"});
+import { Settings } from '../views/settings.js';
+import { Panel } from '../views/components/panel.js';
+const _logger = ServiceProvider.logService.createNewLogger("Blob");
 
 export class ContentBlob
 {
@@ -23,7 +24,7 @@ export class ContentBlob
 	};
 
 
-	activate()
+	activate() : void
 	{
 		_logger.info(`activated blob with no override: ${this.defaultName}`);
 	}
@@ -57,7 +58,7 @@ export class WebBlob extends ContentBlob {
 		this.url=url;
 	}
 	
-	override activate()
+	override activate() : void
 	{
 		window.open(this.url);
 	}
@@ -72,10 +73,28 @@ export class ControlBlob extends ContentBlob {
 	}
 	altActivate() : void
 	{
+		_logger.info(`Transport?:`,_logger.settings.attachedTransports,ServiceProvider.logService.logger.settings.attachedTransports);
+		
 		//occurs on right-click of special blob
 	}
 	dismiss() : void
 	{
 
+	}
+	override activate() : void
+	{
+		_logger.debug(`blob ${this.id.commonId} activate received`);
+		switch (this.id.commonId)
+		{
+			case "settings":
+				
+				document.getElementById("popover")!.appendChild(new Settings());
+				document.getElementById("popover")!.showPopover();
+				break;
+			default:
+				_logger.error(`internal blob with no activate: ${this.id.id}`,this);
+				break;
+		}
+		_logger.debug(`blob ${this.id.commonId} activated`);
 	}
 }

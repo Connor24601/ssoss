@@ -94,6 +94,7 @@ home-screen
   display: none;
 }
 
+
 .slider {
   position: absolute;
   cursor: pointer;
@@ -164,4 +165,13 @@ header {
   position: fixed;
   display:flow-root;
   z-index: 2;
+}
+
+#settingsPage
+{
+  background-color: #151515;
+  border-color: #606060 !important;
+  border: 5px;
+  border-style: solid;
+  border-radius: 5vmin;
 }

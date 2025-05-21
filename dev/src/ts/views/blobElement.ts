@@ -1,10 +1,10 @@
 import content from "../../assets/icon/settings.svg";
 import { BlobMetaData } from "../blob/BlobMetaData.js";
 import { ContentBlob, ControlBlob, WebBlob } from '../blob/ContentBlob.js';
-import { BlobId, BlobType } from "../resources/constants.js";
+import { BlobId, BlobType, Constants } from "../resources/constants.js";
 import { ServiceProvider } from "../util/ServiceProvider.js";
-import { Panel } from "./panel.js";
-const _logger = ServiceProvider.logService.logger.getSubLogger({name:"blobElement"});
+import { Panel } from "./components/panel.js";
+const _logger = ServiceProvider.logService.createNewLogger("blobElement");
 
 export class PseudoBlob extends HTMLElement {
 	containsBlob:boolean=false;
@@ -14,14 +14,9 @@ export class PseudoBlob extends HTMLElement {
 	}
 }
 
-
-
-
-
 export class BlobElement extends PseudoBlob
 {
 	override containsBlob:boolean=true;
-	//get : () => HTMLElement;
 	blob!:ContentBlob;
 	metaData?:BlobMetaData;
 	scale:number=1;
@@ -56,6 +51,11 @@ export class BlobElement extends PseudoBlob
 			this.innerHTML = `<img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" width="0" height="0" alt="settings" />`;
 		}
 		
+		this.onkeyup = (event)=>{
+						if ((Constants.yesKeyCodes.has(event.code.toLowerCase())))
+						{
+							this.blob.activate();
+						}};
 		this.addEventListener("auxclick", this.onAux);
 		this.addEventListener("contextmenu",this.onAux);
 		this.addEventListener("dblclick",this.onAux);

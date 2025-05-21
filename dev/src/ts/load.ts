@@ -5,10 +5,12 @@ import { ServiceProvider } from "./util/ServiceProvider.js";
 import { BlobElement } from "./views/blobElement.js";
 import { HomeScreen } from "./views/home.js";
 import { InputHandler } from "./views/input.js";
-import { Panel } from "./views/panel.js";
+import { Panel } from "./views/components/panel.js";
 import { Search } from "./views/search.js";
+import { Settings } from "./views/settings.js";
+import { Toggle } from "./views/components/UIElements.js";
 
-const _logger = ServiceProvider.logService.logger.getSubLogger({name:"Load"});
+const _logger = ServiceProvider.logService.createNewLogger("Load");
 
 try {
 
@@ -53,6 +55,8 @@ try {
         window.customElements.define('home-screen', HomeScreen);
         window.customElements.define('panel-popup', Panel);
         window.customElements.define('search-bar', Search);
+        window.customElements.define('settings-page', Settings, {extends: "dialog"});
+        window.customElements.define('input-toggle', Toggle);
         
     } catch (error) {
         _logger.fatal(`couldn't define custom elements: ${error}`, error);
