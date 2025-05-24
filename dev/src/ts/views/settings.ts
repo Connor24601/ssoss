@@ -6,7 +6,7 @@ export class Settings extends HTMLDialogElement
 {
     constructor()
     {
-        _logger.info("settings prompted");
+        _logger.debug("settings prompted");
         super();
         try {
             this.className="panel";
@@ -17,14 +17,18 @@ export class Settings extends HTMLDialogElement
             this.style.width="80%";
             this.style.height="80%";
             this.id = "settingsPage";
-            _logger.info("settings completed");
+            _logger.silly("settings completed");
             function callback(this: any, ev: Event) {
                 (this as Toggle).toggle();
                 _logger.info(`changed state: ${ev}`);
             };
             let testSlider = new Toggle(false, callback);
-            _logger.info("toggle created");
+            let button = document.createElement("button");
+            button.title = "logs";
+            button.textContent = "Download Logs"
+            button.onclick = this.downloadLogs;
             this.appendChild(testSlider);
+            this.appendChild(button);
             
         }
         catch (error) {
@@ -32,5 +36,16 @@ export class Settings extends HTMLDialogElement
         }
         
         
+    }
+
+    downloadLogs() : void
+    {
+        _logger.info("Log Download requested");
+       let logFile = new File([ServiceProvider.logService.rawLogDump()], "logs.json",{type:"application/json"});
+        let url = URL.createObjectURL(logFile);
+        let a = document.createElement("a");
+        a.href = url;
+        a.setAttribute("download","logs.json");
+        a.click();
     }
 }

@@ -41,34 +41,40 @@ export class InputHandler
   async getKeyboard()
   {
     _logger.trace("creating keyboard");
-    const requestURL = '../../assets/config/keyConfig.json';
-    const request = new Request(requestURL);
-
-    const response = await fetch(request);
-    const keyFile = await response.json();
-    _logger.silly("received JSON");
-    let keyboard = new Keyboard(keyFile);
-    //keyboard  = await createKeyboard();
-    window.addEventListener('keydown', event => {
-      if (this.inputBlockToggle!.checked)
-      {
-        event.preventDefault();
+    try {
+      const requestURL = '../../assets/config/keyConfig.json';
+      const request = new Request(requestURL);
+      _logger.warn("issued request: ", request);
+      const response = await fetch(request);
+      _logger.warn(`received response: ${response.status}, ${response.body}`, response);
+      const keyFile = await response.json();
+      _logger.warn("received JSON");
+      let keyboard = new Keyboard(keyFile);
+      //keyboard  = await createKeyboard();
+      window.addEventListener('keydown', event => {
+        if (this.inputBlockToggle!.checked)
+        {
+          event.preventDefault();
+          keyboard.keyboardSVG.focus();
+          _logger.silly("preventing default");
+        }
+      });
+      window.addEventListener("blur", event => {
+        _logger.trace("focusOut");
         keyboard.keyboardSVG.focus();
-        _logger.silly("preventing default");
-      }
-    });
-    window.addEventListener("blur", event => {
-      _logger.trace("focusOut");
+        keyboard.resetKeys();
+      });
+      window.addEventListener("focus", event => {
+        _logger.trace("focusReturned");
+        keyboard.keyboardSVG.focus();
+        keyboard.resetKeys();
+      });
+      this.inputPanel!.appendChild(keyboard.keyboardSVG);
       keyboard.keyboardSVG.focus();
-      keyboard.resetKeys();
-    });
-    window.addEventListener("focus", event => {
-      _logger.trace("focusReturned");
-      keyboard.keyboardSVG.focus();
-      keyboard.resetKeys();
-    });
-    this.inputPanel!.appendChild(keyboard.keyboardSVG);
-    keyboard.keyboardSVG.focus();
+      
+    } catch (error) {
+      _logger.error("could not init keyboard: ",error);
+    }
     
   }
 }

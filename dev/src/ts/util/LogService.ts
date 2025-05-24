@@ -181,6 +181,14 @@ export class LogService
         }
         return;
     }
+
+    rawLogDump() : string
+    {
+        this.logger.info(`creating log dump, ${this.batchLogs?.length} stragglers`);
+        let logList = ServiceProvider.logService.storage?.get<ILogObj[]>("logs") ?? [];
+        logList.push(...ServiceProvider.logService.batchLogs ?? []);
+        return JSON.stringify(logList);
+    }
     
     async initializeLogger() {
         if (!import.meta.env.SSR) {

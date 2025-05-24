@@ -18,8 +18,8 @@
 	position:fixed;
 	right:10px;
 	left:10px;
-	top:8em;
-	bottom:2em;
+	top:5em;
+	bottom:1em;
 	gap: .1em;
 	grid-template-rows: repeat(auto-fill, minmax(10em,13em));
 	grid-template-columns: repeat(auto-fill, minmax(10em,13em));
@@ -46,20 +46,18 @@ blob-element
 	background-image: linear-gradient(#606060,#202020 );
 	background-repeat: no-repeat;
 	text-align: center;
-	border-radius: 25%;
-	
-	aspect-ratio: 1;
+	border-radius: 2.5em;
 	padding: 1em;
 	
-
 	display: inline-block;
 	max-height: 6em;
 	
+	aspect-ratio: 1;
 	align-content: center;
 	align-items: center;
 
-	
-	transition: height 0.5s, max-height 0.5s, min-height 0.5s, margin 0.5s;
+	scale: 1;
+	transition: scale 0.5s;
 
 	margin: 1em;
 	border-width: .3em;
@@ -69,18 +67,14 @@ blob-element
 blob-element:hover
 {
 	border-color: #AAAAAA;
-	margin: 0.5em;
-	height: 7em;
-	max-height: 7em;
-	transition: height 0.5s, max-height 0.5s, min-height 0.5s, margin 0.5s;
+	scale: 1.2;
+	transition: scale 0.5s;
 }
 blob-element:focus
 {
 	border-color: #AAAAAA;
-	margin: 0.5em;
-	height: 7em;
-	max-height: 7em;
-	transition: height 0.5s, max-height 0.5s, min-height 0.5s, margin 0.5s;
+	scale: 1.2;
+	transition: scale 0.5s;
 }
 
 blob-element:active
@@ -94,6 +88,7 @@ img
 {
 	
     object-fit: contain;
+	align-self: center;
     width: 90%;
     height: 90%;
     padding: 5%;

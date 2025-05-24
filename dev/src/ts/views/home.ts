@@ -29,7 +29,9 @@ export class HomeScreen extends HTMLElement {
       _logger.error("failure adding background:", error);
     }
     
-  
+    window.onresize = (event)=>{
+      //this.clientWidth
+    }
 
     ServiceProvider.blobService.addBlob(new 
       WebBlob(new URL("/","https://www.youtube.com"),new BlobId("youtube"),"YouTube",BlobSource.default));
@@ -81,7 +83,10 @@ export class HomeScreen extends HTMLElement {
     });
   }
 
+  calculateBlobDistribution() : void
+  {
 
+  }
 
   static fuckWithLogger(logLevel:string) : boolean
   {

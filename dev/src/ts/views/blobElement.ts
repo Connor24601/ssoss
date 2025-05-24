@@ -48,9 +48,10 @@ export class BlobElement extends PseudoBlob
 		if (blob.id.commonId=="settings")
 		{
 			// empty image
-			this.innerHTML = `<img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" width="0" height="0" alt="settings" />`;
+			this.innerHTML='';
+			//this.innerHTML = `<img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" width="0" height="0" alt="settings" />`;
 		}
-		
+
 		this.onkeyup = (event)=>{
 						if ((Constants.yesKeyCodes.has(event.code.toLowerCase())))
 						{

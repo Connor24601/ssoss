@@ -137,17 +137,18 @@ header {
 
 #search {
   position:sticky;
-  margin-top: 10px;
+  margin-top: .2em;
   align-self: center;
   align-content: center;
   font-size:1.5em;
-  height: 3em;
+  height: 1.5em;
   background-color: #202020;
-  border: 5px;
+  border: .2em;
+  margin:.2em;
   border-color:#606060;
   color: #FFFFFF;
-  border-radius: 20px;
-  padding: 5px 15px;
+  border-radius: 1em;
+  padding: 1em;
   font-family: oxygen;
   
 }

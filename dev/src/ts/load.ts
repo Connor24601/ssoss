@@ -41,6 +41,7 @@ try {
     else
     {
         _logger.info("running in prod");
+        ServiceProvider.logService.changeLogLevel(LogLevel.SILLY);
     }
     
     try {
