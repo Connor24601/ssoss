@@ -1,6 +1,9 @@
 import { ProfileId } from "../resources/constants.js";
 import {Keyboard} from "./keyboard.js";
 import { ServiceProvider } from "../util/ServiceProvider.js";
+
+//import * as data from "./assets/config/keyConfig.json";
+
 const _logger = ServiceProvider.logService.createNewLogger("input");
 
 class InputSettings 
@@ -41,15 +44,30 @@ export class InputHandler
   async getKeyboard()
   {
     _logger.trace("creating keyboard");
+    let keyFile:JSON;
     try {
+      
       const requestURL = '../../assets/config/keyConfig.json';
       const request = new Request(requestURL);
-      _logger.warn("issued request: ", request);
-      const response = await fetch(request);
-      _logger.warn(`received response: ${response.status}, ${response.body}`, response);
-      const keyFile = await response.json();
-      _logger.warn("received JSON");
-      let keyboard = new Keyboard(keyFile);
+      _logger.warn("issued request: ", request.url);
+      const response = await fetch(request).then(async function (response) {
+        keyFile = await response.json();
+        _logger.warn(`received response: ${response.status}, ${JSON.stringify(keyFile)}`);
+        
+        _logger.warn("received JSON");
+      });
+      
+    }
+    catch (error)
+    {
+      _logger.error(error);
+      let config = import.meta.glob("./assets/config/keyConfig.json");
+      _logger.info(`import: ${config}`);
+      //keyFile = JSON.parse(await config.body);
+    }
+    try
+    {
+      let keyboard = new Keyboard(keyFile!);
       //keyboard  = await createKeyboard();
       window.addEventListener('keydown', event => {
         if (this.inputBlockToggle!.checked)
