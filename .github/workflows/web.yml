@@ -23,7 +23,7 @@ concurrency:
 
 jobs:
   # Single deploy job since we're just deploying
-  build:
+  web:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -39,13 +39,6 @@ jobs:
       - name: Build Artifact
         working-directory: ./dev
         run: npm run build
-  deploy:
-    needs: build
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: [self-hosted]
-    steps:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
