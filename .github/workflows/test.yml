@@ -21,7 +21,7 @@ jobs:
     steps:
     - name: Pickup
       id: pickup
-      run: echo "action ${{github.action}} #${{github.run_id}} triggered by ${{github.actor}} acknowledged by ${{runner.os}} ${{runner.arch}} runner ${{runner.name}}"
+      run: echo "action ${{github.action}} \#${{github.run_id}} triggered by ${{github.actor}} acknowledged by ${{runner.os}} ${{runner.arch}} runner ${{runner.name}}"
     - name: Checkout
       id: checkout
       uses: actions/checkout@v4
