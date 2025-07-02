@@ -35,11 +35,12 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Download Dependencies
         working-directory: ./dev
-        run: npm -i
+        run: npm install
       - name: Build Artifact
         working-directory: ./dev
         run: npm run build
   deploy:
+    needs: build
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
