@@ -39,14 +39,11 @@ jobs:
       - name: Build Artifact
         working-directory: ./dev
         run: npm run build
-      - name: Find Artifact
-        working-directory: .
-        run: ls
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
-          path: './dist/.'
+          path: './dev/dist/.'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
