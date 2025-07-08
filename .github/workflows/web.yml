@@ -50,7 +50,7 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Download Dependencies
-        working-directory: ./dev
+        working-directory: dev
         run: npm install
   build:
     environment:
@@ -59,7 +59,7 @@ jobs:
     runs-on: ["${{ inputs.runnerOS }}"]
     steps:
       - name: Build Artifact
-        working-directory: ./dev
+        working-directory: dev
         run: npm run build
   deploy:
     environment:
