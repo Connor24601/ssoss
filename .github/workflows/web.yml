@@ -39,9 +39,9 @@ concurrency:
 
 jobs:
   # Single deploy job since we're just deploying
-  checkout:
+  build:
     environment:
-      name: github-pages
+      name: build
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ["${{ inputs.runnerOS }}"]
     steps:
@@ -52,24 +52,13 @@ jobs:
       - name: Download Dependencies
         working-directory: dev
         run: npm install
-  build:
-    environment:
-      name: build
-    needs: checkout
-    runs-on: ["${{ inputs.runnerOS }}"]
-    steps:
+        
       - name: Build Artifact
-        working-directory: ../dev
+        working-directory: dev
         run: npm run build
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    needs: build
-    runs-on: ["${{ inputs.runnerOS }}"]
-    steps:
+
       - name: Upload Artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           # Upload entire repository
           path: 'dist/.'
