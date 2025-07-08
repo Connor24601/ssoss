@@ -8,7 +8,7 @@ on:
         default: self-hosted
         type: choice
         options:
-        - Ubuntu
+        - ubuntu-latest
         - macOS
         - self-hosted
 concurrency:
@@ -17,7 +17,7 @@ concurrency:
 jobs:
 
   test:
-    runs-on: [self-hosted, "${{ inputs.runnerOS }}"]
+    runs-on: ["${{ inputs.runnerOS }}"]
     steps:
     - name: Pickup
       id: pickup
