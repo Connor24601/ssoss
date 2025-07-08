@@ -59,7 +59,6 @@ jobs:
     runs-on: ["${{ inputs.runnerOS }}"]
     steps:
       - name: Build Artifact
-        working-directory: dev
         run: npm run build
   deploy:
     environment:
@@ -72,7 +71,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
-          path: './dev/dist/.'
+          path: 'dist/.'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
