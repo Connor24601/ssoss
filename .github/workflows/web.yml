@@ -59,6 +59,7 @@ jobs:
     runs-on: ["${{ inputs.runnerOS }}"]
     steps:
       - name: Build Artifact
+        working-directory: ../dev
         run: npm run build
   deploy:
     environment:
