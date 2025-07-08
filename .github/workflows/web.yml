@@ -8,7 +8,22 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab or from another workflow
   workflow_dispatch:
+    inputs:
+      runnerOS:
+        required: false
+        default: ubuntu-latest
+        type: choice
+        options:
+        - ubuntu-latest
+        - macOS
+        - self-hosted
   workflow_call:
+    inputs:
+      runnerOS:
+        required: false
+        default: ubuntu-latest
+        type: string
+    
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -28,7 +43,7 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: [self-hosted]
+    runs-on: ["${{ inputs.runnerOS }}"]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -41,7 +56,7 @@ jobs:
     environment:
       name: build
     needs: checkout
-    runs-on: [self-hosted]
+    runs-on: ["${{ inputs.runnerOS }}"]
     steps:
       - name: Build Artifact
         working-directory: ./dev
@@ -51,7 +66,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     needs: build
-    runs-on: [self-hosted]
+    runs-on: ["${{ inputs.runnerOS }}"]
     steps:
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
