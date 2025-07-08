@@ -3,11 +3,12 @@ name: Web Deploy
 
 on:
   # Runs on pushes targeting the default branch
-  push:
-    branches: ["main"]
+  #push:
+    #branches: ["main"]
 
-  # Allows you to run this workflow manually from the Actions tab
+  # Allows you to run this workflow manually from the Actions tab or from another workflow
   workflow_dispatch:
+  workflow_call:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -23,7 +24,7 @@ concurrency:
 
 jobs:
   # Single deploy job since we're just deploying
-  web:
+  checkout:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -36,9 +37,22 @@ jobs:
       - name: Download Dependencies
         working-directory: ./dev
         run: npm install
+  build:
+    environment:
+      name: build
+    needs: checkout
+    runs-on: [self-hosted]
+    steps:
       - name: Build Artifact
         working-directory: ./dev
         run: npm run build
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: [self-hosted]
+    steps:
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
         with:
