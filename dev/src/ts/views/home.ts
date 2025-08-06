@@ -22,9 +22,14 @@ export class HomeScreen extends HTMLElement {
     var container = document.createElement("div");
     container.className="container";
     try {
-      let background = new BackgroundSVG();
-      //this.appendChild(background.background);
-      _logger.info("successful adding svg background");
+      if (ServiceProvider.storage().get<boolean>("animatedBackground"))
+      {
+        let background = new BackgroundSVG();
+        this.appendChild(background.background);
+        
+        _logger.info("successful adding svg background");
+      }
+      
     } catch (error) {
       _logger.error("failure adding background:", error);
     }
