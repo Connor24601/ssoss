@@ -3,9 +3,11 @@ import { ServiceProvider } from "../util/ServiceProvider.js";
 import { StorageService } from "../util/StorageService.js";
 import { ContentBlob } from "./ContentBlob.js";
 
+const _logger = ServiceProvider.logService.createNewLogger("BlobManager");
+
 export class BlobManager
 {
-	_logger = ServiceProvider.logService.createNewLogger("BlobManager");
+	
 	activeBlobs:Map<BlobId,ContentBlob> =  new Map<BlobId,ContentBlob>();
 	
 	blobStorage:Map<BlobSource,StorageLocation> =  new Map<BlobSource,StorageLocation>();
@@ -29,7 +31,7 @@ export class BlobManager
 	{
 		this.blobsToStore.add(blob.id);
 		this.activeBlobs.set(blob.id,blob);
-		this._logger.info(`Blob added: ${blob.id.commonId ?? blob.defaultName}`);
+		_logger.info(`Blob added: ${blob.id.commonId ?? blob.defaultName}`);
 		
 		return true;
 	}
@@ -49,7 +51,7 @@ export class BlobManager
 		{
 			return rblob;
 		}
-		this._logger.warn(`could not find blob ${commonId}`);
+		_logger.warn(`could not find blob ${commonId}`);
 		return null;
 	}
 	

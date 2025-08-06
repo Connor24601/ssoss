@@ -51,9 +51,9 @@ export class StorageService
         }
     }
     
-    get<type>(name:string) : type | null
+    get<type>(name:string) : type | undefined
     {
-        let returnObject:type | null = null;
+        let returnObject:type | undefined;
         try {
             if (!this.hasStorage)
             {
@@ -69,7 +69,7 @@ export class StorageService
             returnObject = JSON.parse(raw) as type;
             if (name != "logs")
             {
-                this._logger.trace(`successful retrieval of ${name}`);
+                this._logger.silly(`successful retrieval of ${name}`);
             }
         } catch (error) {
             this._logger.error(`error getting ${name} from ${this.storeLocation}`, error);
