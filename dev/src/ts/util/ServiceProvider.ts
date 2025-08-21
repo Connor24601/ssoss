@@ -35,14 +35,14 @@ export class ServiceProvider
 
     static get profileService(): ProfileManager {
         if (!this._profileManager) {
-            this._profileManager = new ProfileManager();
+            this._profileManager = new ProfileManager(this.logService.createNewLogger("ProfileService"));
         }
         return this._profileManager;
     }
 
     static get blobService(): BlobManager {
         if (!this._blobManager) {
-            this._blobManager = new BlobManager();
+            this._blobManager = new BlobManager(this.logService.createNewLogger("BlobManager"));
         }
         return this._blobManager;
     }
