@@ -84,12 +84,12 @@ export class BlobElement extends PseudoBlob
 
 		this.focus();
 		
-		let x = `${this.getBoundingClientRect().x + this.getBoundingClientRect().width}px`;
+		let x = `${this.getBoundingClientRect().x + this.getBoundingClientRect().width + 5}px`;
 		let y = `${this.getBoundingClientRect().y}px`;
 		if (this.optionsPanel == undefined)
 		{
 			this.optionsPanel = new Panel(x,y,`${this.getBoundingClientRect().height}px`,`${this.getBoundingClientRect().width/2}px`);
-			this.appendChild(this.optionsPanel);
+			document.getElementById("blobContainer")!.appendChild(this.optionsPanel);
 		}
 		else
 		{

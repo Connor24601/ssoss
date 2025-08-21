@@ -1,8 +1,8 @@
-import { ProfileId } from "../resources/constants.js";
+import { KeyConfig, ProfileId } from "../resources/constants.js";
 import {Keyboard} from "./keyboard.js";
 import { ServiceProvider } from "../util/ServiceProvider.js";
 
-//import * as data from "./assets/config/keyConfig.json";
+import * as keyConfig from "../../assets/config/keyConfig.json" with {type: 'json'};
 
 const _logger = ServiceProvider.logService.createNewLogger("input");
 
@@ -44,9 +44,17 @@ export class InputHandler
   async getKeyboard()
   {
     _logger.trace("creating keyboard");
-    let keyFile:JSON;
+    let keyFile:KeyConfig;
     try {
+      //let config = import.meta.glob("./assets/config/keyConfig.json");
+      //_logger.info(`import: ${keyConfig}`);
+      keyFile = keyConfig.default;
       
+      
+    }
+    catch (error)
+    {
+      _logger.error(error);
       const requestURL = '../../assets/config/keyConfig.json';
       const request = new Request(requestURL);
       _logger.warn("issued request: ", request.url);
@@ -56,14 +64,6 @@ export class InputHandler
         
         _logger.warn("received JSON");
       });
-      
-    }
-    catch (error)
-    {
-      _logger.error(error);
-      let config = import.meta.glob("./assets/config/keyConfig.json");
-      _logger.info(`import: ${config}`);
-      //keyFile = JSON.parse(await config.body);
     }
     try
     {

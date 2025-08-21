@@ -8,6 +8,7 @@ import { ContentBlob, ControlBlob, WebBlob } from "../blob/ContentBlob.js";
 import { Search } from "./search.js";
 import { BackgroundSVG } from "../resources/background.js";
 import { Panel } from "./components/panel.js";
+import { debounce } from '../util/asyncHelper.js';
 
 const _logger = ServiceProvider.logService.createNewLogger("home");
 
@@ -21,6 +22,8 @@ export class HomeScreen extends HTMLElement {
     super();
     var container = document.createElement("div");
     container.className="container";
+    container.id="blobContainer";
+
     try {
       if (ServiceProvider.storage().get<boolean>("animatedBackground"))
       {
@@ -33,11 +36,11 @@ export class HomeScreen extends HTMLElement {
     } catch (error) {
       _logger.error("failure adding background:", error);
     }
-    
-    window.onresize = (event)=>{
-      //this.clientWidth
+    if (ServiceProvider.profileService.current.prefs.autoFormatBlobs)
+    {
+      window.addEventListener('resize', debounce(200, this.calculateBlobDistribution));
     }
-
+    
     ServiceProvider.blobService.addBlob(new 
       WebBlob(new URL("/","https://www.youtube.com"),new BlobId("youtube"),"YouTube",BlobSource.default));
 
@@ -88,9 +91,11 @@ export class HomeScreen extends HTMLElement {
     });
   }
 
-  calculateBlobDistribution() : void
+  calculateBlobDistribution(event?:Event) : void
   {
-
+    _logger.info(`${window.innerWidth}, ${window.innerHeight}, ${window.screenX}, ${window.screenY}`);
+    var ratio=window.innerWidth/window.innerHeight;
+    this.blobGrid.length
   }
 
   static fuckWithLogger(logLevel:string) : boolean

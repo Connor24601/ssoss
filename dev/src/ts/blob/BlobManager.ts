@@ -1,9 +1,11 @@
+import { ILogObj, Logger } from "tslog";
 import { BlobId, BlobSource, StorageLocation } from "../resources/constants.js";
 import { ServiceProvider } from "../util/ServiceProvider.js";
 import { StorageService } from "../util/StorageService.js";
 import { ContentBlob } from "./ContentBlob.js";
 
-const _logger = ServiceProvider.logService.createNewLogger("BlobManager");
+//const _logger = ServiceProvider.logService.createNewLogger("BlobManager");
+var _logger:Logger<ILogObj>;
 
 export class BlobManager
 {
@@ -14,9 +16,9 @@ export class BlobManager
 
 	blobsToStore:Set<BlobId> = new Set<BlobId>();
 
-	constructor()
+	constructor(logger:Logger<ILogObj>)
 	{
-		
+		_logger = logger;
 		return;
 	}
 
