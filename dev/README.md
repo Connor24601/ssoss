@@ -2,14 +2,14 @@
 As this is a casual project, no dates are assigned to development tasks, and many tasks may be done in parallel or even out of order.
 
 - [ ] github actions
-- [ ] log downloading
+- [X] log downloading
 - [ ] settings page (colors, background, etc)
 - [ ] blob organizing / rearranging
 - [ ] profile UI
 - [ ] profiles save/load
 - [ ] blobs save/load
 - [ ] blob creation
-- [ ] electron wrapper
+- [X] electron wrapper
 - [ ] media control
 
 

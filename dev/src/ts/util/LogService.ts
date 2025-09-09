@@ -8,11 +8,11 @@ import { setInterval } from "timers/promises";
 let rfs: Promise<typeof import("rotating-file-stream")>
 if (import.meta.env.SSR)
 {
-    rfs = import("rotating-file-stream");
+    rfs = import(`rotating-file-stream`);
 }
 else
 {
-    console.log('running without rfs');
+    console.log(`running without rfs`);
 }
 
 export enum LogLevel {
