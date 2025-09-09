@@ -3,12 +3,18 @@
     "src",
     "custom.d.ts",
     "vite-env.d.ts",
+    "vite.config.ts",
     "src/assets",
 ],
 
 
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig to read more about this file */
+
+    "baseUrl": "./src",
+    "paths": {
+      "@assets/*": ["assets/*"]
+    },
 
     /* Projects */
     // "incremental": true,                              /* Save .tsbuildinfo files to allow for incremental compilation of projects. */

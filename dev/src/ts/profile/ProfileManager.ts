@@ -2,7 +2,7 @@ import { ServiceProvider } from "../util/ServiceProvider.js";
 import { BlobMetaData } from '../blob/BlobMetaData.js';
 import { BlobId, StorageKeys } from "../resources/constants.js";
 import { Profile } from "./Profile.js";
-import * as dProfile from "../../assets/config/defaultProfile.json" with {type: 'json'};
+import * as dProfile from "@assets/config/defaultProfile.json" with {type: 'json'};
 import { ILogObj, Logger } from "tslog";
 
 //const _logger = ServiceProvider.logService.createNewLogger("ProfileManager");
