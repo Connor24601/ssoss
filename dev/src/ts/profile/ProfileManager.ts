@@ -4,6 +4,7 @@ import { BlobId, StorageKeys } from "../resources/constants.js";
 import { Profile } from "./Profile.js";
 import * as dProfile from "../../assets/config/defaultProfile.json" with {type: 'json'};
 import { ILogObj, Logger } from "tslog";
+import plus from "../../assets/icon/plus.svg";
 
 //const _logger = ServiceProvider.logService.createNewLogger("ProfileManager");
 
@@ -16,6 +17,9 @@ export class ProfileManager
     defaultProfile?:Profile;
     activeProfile?:Profile;
     profiles:Map<string,Profile>;
+
+    initializationQueue:Set<Function> = new Set<Function>();
+    
 
     constructor(logger:Logger<ILogObj>)
     {
@@ -32,6 +36,11 @@ export class ProfileManager
         this.profiles ??= new Map<string,Profile>();
     }
 
+    public registerWhenInitialized(callback:Function)
+    {
+        this.initializationQueue.add(callback);
+    }
+
     loadFromStorage() {
         _logger.trace("ProfileManager starting storage check");
         this.defaultProfile = ServiceProvider.storage().get<Profile>(StorageKeys.defaultProfile);
@@ -42,12 +51,14 @@ export class ProfileManager
         {
             // read in default profile
             _logger.warn("default profile not found, using stock");
-            this.defaultProfile = dProfile.default as unknown as Profile;
+            //this.defaultProfile = dProfile.default as unknown as Profile;
+            //this.defaultProfile.profilePicture = new URL(plus);
         }
         else
         {
             _logger.info(`default profile found: ${this.defaultProfile.id}`);
         }
+        this.initializationQueue.forEach((callback:Function) => callback());
     }
 
     
@@ -55,8 +66,5 @@ export class ProfileManager
         return (this.activeProfile ?? this.defaultProfile)!;
     }
     
-
-
-
 
 }

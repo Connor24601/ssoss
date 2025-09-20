@@ -1,4 +1,3 @@
-import content from "../../assets/icon/settings.svg";
 import { BlobMetaData } from "../blob/BlobMetaData.js";
 import { ContentBlob, ControlBlob, WebBlob } from '../blob/ContentBlob.js';
 import { BlobId, BlobType, Constants } from "../resources/constants.js";

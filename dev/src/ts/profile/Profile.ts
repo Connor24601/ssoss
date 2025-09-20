@@ -4,12 +4,12 @@ import { BlobId, ProfileId, Preferences } from '../resources/constants.js';
 
 export class Profile {
 
-    static default:Profile;
-
     name:string;
     nickname:string;
     id:ProfileId;
     collabByDefault:boolean;
+    URLPicture?:URL;
+    localPicture?:ImageData;
     prefs:Preferences;
     blobs:Map<BlobId,BlobMetaData> = new Map<BlobId,BlobMetaData>();
     blobAuth:Map<BlobId,BlobAuth> = new Map<BlobId,BlobAuth>();
@@ -22,6 +22,19 @@ export class Profile {
         this.id = new ProfileId();
         this.prefs = prefs;
 
+    }
+
+    set profilePicture(value:URL | ImageData | undefined)
+    {
+        if (typeof value == typeof URL)
+        {
+            this.URLPicture=value as URL;
+        }
+        this.localPicture = value as ImageData;
+        
+    }
+    get profilePicture(){
+        return this.localPicture || this.URLPicture;
     }
 
     getBlobMetaData(id:BlobId) : BlobMetaData | null
