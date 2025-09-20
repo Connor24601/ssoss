@@ -2,7 +2,7 @@ import { KeyConfig, ProfileId } from "../resources/constants.js";
 import {Keyboard} from "./keyboard.js";
 import { ServiceProvider } from "../util/ServiceProvider.js";
 
-import * as keyConfig from "../../assets/config/keyConfig.json" with {type: 'json'};
+import * as keyConfig from "@assets/config/keyConfig.json" with {type: 'json'};
 
 const _logger = ServiceProvider.logService.createNewLogger("input");
 
@@ -55,7 +55,7 @@ export class InputHandler
     catch (error)
     {
       _logger.error(error);
-      const requestURL = '../../assets/config/keyConfig.json';
+      /*const requestURL = '../../assets/config/keyConfig.json';
       const request = new Request(requestURL);
       _logger.warn("issued request: ", request.url);
       const response = await fetch(request).then(async function (response) {
@@ -63,7 +63,7 @@ export class InputHandler
         _logger.warn(`received response: ${response.status}, ${JSON.stringify(keyFile)}`);
         
         _logger.warn("received JSON");
-      });
+      });*/
     }
     try
     {
