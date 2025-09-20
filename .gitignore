@@ -9,6 +9,7 @@ node_modules/
 
 # Compiled files
 dist/
+dev/dist
 src/ts/*/*.js
 ios
 android

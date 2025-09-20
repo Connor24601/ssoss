@@ -9,10 +9,15 @@
     "mobile",
     "streaming"
   ],
-  "main": "main.cjs",
+  "main": "main.ts",
+  "build": {
+    "appId": "com.ssoss.app",
+    "config": {
+    }
+  },
   "scripts": {
     "web": "vite",
-    "start": "vite build && electron .",
+    "start": "electron .",
     "host": "vite --host",
     "android": "npx cap open android",
     "ios": "npx cap open ios",
