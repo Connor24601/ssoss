@@ -22,6 +22,12 @@ p {
     padding: 10px 5px 0px 10px;
     margin: 2px;
 }
+#profile
+{
+  position:fixed;
+  right: 20px;
+  padding: 10px;
+}
 body {
     background-image: linear-gradient(#060611,#200606 );
     background-attachment: fixed;

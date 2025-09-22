@@ -8,7 +8,7 @@ import { ContentBlob, ControlBlob, WebBlob } from "../blob/ContentBlob.js";
 import { Search } from "./search.js";
 import { BackgroundSVG } from "../resources/background.js";
 import { Panel } from "./components/panel.js";
-import { debounce } from '../util/asyncHelper.js';
+//import { debounce } from '../util/asyncHelper.js';
 
 const _logger = ServiceProvider.logService.createNewLogger("home");
 
@@ -38,7 +38,7 @@ export class HomeScreen extends HTMLElement {
     }
     if (ServiceProvider.profileService.current.prefs.autoFormatBlobs)
     {
-      window.addEventListener('resize', debounce(200, this.calculateBlobDistribution));
+      window.addEventListener('resize', this.calculateBlobDistribution);
     }
     
     ServiceProvider.blobService.addBlob(new 

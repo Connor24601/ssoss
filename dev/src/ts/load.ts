@@ -9,6 +9,7 @@ import { Panel } from "./views/components/panel.js";
 import { Search } from "./views/search.js";
 import { Settings } from "./views/settings.js";
 import { Toggle } from "./views/components/UIElements.js";
+import { ProfilePanel } from "./views/profilePanel.js";
 
 const _logger = ServiceProvider.logService.createNewLogger("Load");
 
@@ -54,6 +55,7 @@ try {
         window.customElements.define('blob-element', BlobElement);
         _logger.debug("blob defined");
         window.customElements.define('home-screen', HomeScreen);
+        window.customElements.define('profile-panel', ProfilePanel);
         window.customElements.define('panel-popup', Panel);
         window.customElements.define('search-bar', Search);
         window.customElements.define('settings-page', Settings, {extends: "dialog"});

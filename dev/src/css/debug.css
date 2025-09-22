@@ -11,3 +11,7 @@ footer {
     outline-color: red;
     outline-style: dashed;
 }
+#profile {
+    outline-color: lightgreen;
+    outline-style: dashed;
+}

@@ -10,6 +10,7 @@ export class Profile {
     collabByDefault:boolean;
     URLPicture?:URL;
     localPicture?:ImageData;
+    rawPicture?:String;
     prefs:Preferences;
     blobs:Map<BlobId,BlobMetaData> = new Map<BlobId,BlobMetaData>();
     blobAuth:Map<BlobId,BlobAuth> = new Map<BlobId,BlobAuth>();
@@ -24,17 +25,24 @@ export class Profile {
 
     }
 
-    set profilePicture(value:URL | ImageData | undefined)
+    set profilePicture(value:URL | ImageData | String | undefined)
     {
-        if (typeof value == typeof URL)
-        {
-            this.URLPicture=value as URL;
+        switch(typeof value){
+            case typeof URL:
+                this.URLPicture=value as URL;
+                break;
+            case typeof ImageData:
+                this.localPicture=value as ImageData;
+                break;
+            case typeof String:
+                this.rawPicture = value as String;
+            default:
+                return;
         }
-        this.localPicture = value as ImageData;
         
     }
     get profilePicture(){
-        return this.localPicture || this.URLPicture;
+        return this.localPicture || this.rawPicture || this.URLPicture;
     }
 
     getBlobMetaData(id:BlobId) : BlobMetaData | null
