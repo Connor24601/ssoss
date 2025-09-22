@@ -23,7 +23,7 @@ export enum BlobSource
 export enum BlobType
 {
     web="WEB",
-    internal="INTERNAL",
+    internal="INTERNAL", // cannot be deleted??
     script="SCRIPT",
     local="LOCAL",
     unknown="UNKNOWN"
@@ -34,6 +34,63 @@ export enum StorageLocation {
     localStorage = "localStorage",
     sessionStorage = "sessionStorage",
     fileStorage = "fileStorage"
+}
+
+export enum StorageKeys {
+    defaultProfile = "defaultProfile",
+    collabProfile = "collabProfile",
+    lastProfile = "leftoverProfile",
+    profiles = "profiles",
+    preferences = "prefs"
+}
+
+// preferences are any settings that do not affect profile/blob behavior
+// but do change look/feel
+export class Preferences {
+    background?:Background;
+    autoFormatBlobs?:boolean;
+
+    constructor()
+    {
+
+    }
+}
+
+export class Color {
+    /*hue?:string;
+    saturation?:*/
+    hex?:string;
+    constructor(hex:string)
+    {
+        this.hex = hex;
+    }
+}
+
+export enum BackgroundType {
+    solid = "solidColor",
+    gradient = "gradient",
+    animated = "animated",
+    image = "image"
+}
+
+export class KeyConfig {
+    keys!:Array<any>;
+}
+
+export class Background {
+
+    type:BackgroundType;
+    color1?:Color;
+    color2?:Color;
+    image?:URL;
+
+    constructor(type:BackgroundType=BackgroundType.gradient)
+    {
+        this.type = type;
+        this.color1 = new Color("#060611");
+        this.color2 = new Color("#200606");
+        this.image = new URL("https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/newtab-wallpapers-v2/bd424c86-6366-4f2b-b8dc-74d21439c1fb.avif");
+    }
 }
 
 export class BlobId

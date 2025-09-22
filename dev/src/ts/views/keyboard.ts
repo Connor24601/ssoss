@@ -1,3 +1,4 @@
+import { KeyConfig } from "../resources/constants.js";
 import { ServiceProvider } from "../util/ServiceProvider.js";
 const _logger = ServiceProvider.logService.createNewLogger("keyboard");
 class Key  {
@@ -73,12 +74,12 @@ export class Keyboard {
 	keyboardSVG :SVGSVGElement;
 	keyMap : Map<string, Key> = new Map<string, Key>();
 
-	constructor(configJSON:JSON) {
+	constructor(config:KeyConfig) {
 		this.keyboardSVG = document.createElementNS('http://www.w3.org/2000/svg','svg');
 		this.keyboardSVG.setAttribute('xmlns:xlink','http://www.w3.org/1999/xlink');
 		this.keyboardSVG.setAttribute("id","keyboard");
 		this.keyboardSVG.setAttribute("autoFocus", "true");
-		if (this.readJSON(configJSON))
+		if (this.readConfig(config))
 		{
 			this.createBinding();
 		}
@@ -186,21 +187,21 @@ export class Keyboard {
 		});
 	}
 
-	readJSON(configJSON:any) : boolean
+	readConfig(config:KeyConfig) : boolean
 	{
 		try
 		{
 			var offset:[number,number]=[0,0];
-			for (const row in configJSON["keys"])
+			for (const row in config["keys"])
 			{
 				offset[0] = 0;
 				var offsetKeys = 0;
-				for (const column in configJSON["keys"][row])
+				for (const column in config["keys"][row])
 				{
 					
 					var size = 1;
 					var accepted:string[] = [];
-					var key = configJSON["keys"][row][column];
+					var key = config["keys"][row][column];
 					if (typeof key === "string")
 					{
 						offset[0] += 3;

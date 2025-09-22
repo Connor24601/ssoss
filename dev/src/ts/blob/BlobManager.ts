@@ -1,20 +1,24 @@
+import { ILogObj, Logger } from "tslog";
 import { BlobId, BlobSource, StorageLocation } from "../resources/constants.js";
 import { ServiceProvider } from "../util/ServiceProvider.js";
 import { StorageService } from "../util/StorageService.js";
 import { ContentBlob } from "./ContentBlob.js";
 
+//const _logger = ServiceProvider.logService.createNewLogger("BlobManager");
+var _logger:Logger<ILogObj>;
+
 export class BlobManager
 {
-	_logger = ServiceProvider.logService.createNewLogger("BlobManager");
+	
 	activeBlobs:Map<BlobId,ContentBlob> =  new Map<BlobId,ContentBlob>();
 	
 	blobStorage:Map<BlobSource,StorageLocation> =  new Map<BlobSource,StorageLocation>();
 
 	blobsToStore:Set<BlobId> = new Set<BlobId>();
 
-	constructor()
+	constructor(logger:Logger<ILogObj>)
 	{
-		
+		_logger = logger;
 		return;
 	}
 
@@ -29,7 +33,7 @@ export class BlobManager
 	{
 		this.blobsToStore.add(blob.id);
 		this.activeBlobs.set(blob.id,blob);
-		this._logger.info(`Blob added: ${blob.id.commonId ?? blob.defaultName}`);
+		_logger.info(`Blob added: ${blob.id.commonId ?? blob.defaultName}`);
 		
 		return true;
 	}
@@ -49,7 +53,7 @@ export class BlobManager
 		{
 			return rblob;
 		}
-		this._logger.warn(`could not find blob ${commonId}`);
+		_logger.warn(`could not find blob ${commonId}`);
 		return null;
 	}
 	

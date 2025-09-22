@@ -1,0 +1,49 @@
+{
+    "name":"default",
+    "nickname":"Add Profile",
+    "id":"default",
+    "collabByDefault":true,
+    "prefs": {
+        "background":{
+            "type":"gradient",
+            "color1":{
+                "hex":"#060611"
+            },
+            "color2":{
+                "hex": "#060611"
+            },
+            "image": {
+                "url": "https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/newtab-wallpapers-v2/bd424c86-6366-4f2b-b8dc-74d21439c1fb.avif"
+            }
+        }
+    },
+    "blobs": {
+        "settings": {
+            "id":"settings"
+        },
+        "spotify": {
+            "id":"spotify"
+        },
+        "youtube": {
+            "id":"youtube"
+        },
+        "hulu": {
+            "id":"hulu"
+        },
+        "hboMax": {
+            "id":"hboMax"
+        },
+        "netflix": {
+            "id":"netflix"
+        },
+        "amazonPrime": {
+            "id":"amazonPrime"
+        },
+        "add": {
+            "id":"add"
+        }
+
+
+    },
+    "blobAuth": {}
+}

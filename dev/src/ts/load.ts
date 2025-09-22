@@ -63,7 +63,7 @@ try {
         _logger.fatal(`couldn't define custom elements: ${error}`, error);
     }
     try {
-        ServiceProvider.profileService.loadFromStorage();
+        //ServiceProvider.profileService.loadFromStorage();
         //ServiceProvider.profileService.
     } catch (error) {
         _logger.fatal(`failure to initialize: ${error}`, error);
