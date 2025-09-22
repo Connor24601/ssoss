@@ -28,7 +28,6 @@
   "repository": "https://github.com/Connor24601/ssoss",
   "dependencies": {
     "@capacitor/android": "^7.2.0",
-    "@capacitor/camera": "latest",
     "@capacitor/core": "^7.2.0",
     "@capacitor/ios": "^7.2.0",
     "@capacitor/splash-screen": "latest",
@@ -43,6 +42,9 @@
     "typescript": "^5.8.2",
     "vite": "^7.1.4"
   },
-  "author": "",
-  "license": "ISC"
+  "author": {
+    "name":"Blake Johnson",
+    "email": "blakeconnorjohnson@gmail.com"
+  },
+  "license": "EUPL-1.2 license"
 }

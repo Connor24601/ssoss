@@ -1,6 +1,11 @@
 // Modules to control application life and create native browser window
 import { app, BrowserWindow } from'electron';
 import path from 'node:path';
+//const { ServiceProvider } = require('util/ServiceProvider');
+
+const hostname = '127.0.0.1';
+const port = 3000;
+
 
 
 function createWindow () {
@@ -46,3 +51,17 @@ app.on('window-all-closed', function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+function host(data)
+{
+  /*const server = http.createServer((req, res) => {
+    var strippedFile = request.url
+    
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/html');
+  res.end(data);
+});
+
+server.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
+}); */
+}

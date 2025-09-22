@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="0 0 960 960" width="100%">
+    <defs>
+        <path id="BottomSwing" d="M 57 380 A 400 460 180 1 0 903 380 Z" fill="#CCCCDD" stroke="#CCCCDD" stroke-width="5"/>
+    </defs>
+    <path d="M 57 400 A 400 460 180 1 0 903 400 Z" stroke="#000000" fill="#777780" stroke-width="5"/>
+    <ellipse cx="480" cy="400" rx="425" ry="200" stroke="#000000" fill="#9999AA" stroke-width="5"/>
+    <ellipse cx="480" cy="419" rx="385" ry="175" stroke="#000000" fill="#CC9977" stroke-width="3"/>
+    <text>
+        <textPath startOffset="600" href="#BottomSwing" fill="#00000004" >Copyright Blake Johnson 2025</textPath>
+    </text>
+    <path d="M 126 20 a 12 12 0 1 1 24 0 L 164 410 l -12 0 L 126 20 z" fill="#856055" stroke="#000000" stroke-width="1.5"/>
+    <path d="M 176 20 a 12 12 0 1 1 24 0 L 194 410 l -12 0 L 176 20 z" fill="#856055" stroke="#000000" stroke-width="1.5"/>
+
+    <path d="M 210 400 s 40 0 80 -40 c 10 -20 -30 -50 -70 -40 c -20 10 -20 30 -10 76  z" fill="#B58472" stroke="#000000" stroke-width="1.5"/>
+</svg>
