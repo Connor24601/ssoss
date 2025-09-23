@@ -1,7 +1,6 @@
 // Modules to control application life and create native browser window
 import { app, BrowserWindow } from'electron';
 import path from 'node:path';
-//const { ServiceProvider } = require('util/ServiceProvider');
 
 const hostname = '127.0.0.1';
 const port = 3000;

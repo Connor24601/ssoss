@@ -41,7 +41,7 @@ pseudo-blob
 }
 
 
-blob-element
+.blob
 {
 	background-image: linear-gradient(#606060,#202020 );
 	background-repeat: no-repeat;
@@ -64,20 +64,20 @@ blob-element
 	border-color: inherit;
 	border-style: solid;
 }
-blob-element:hover
+.blob:hover
 {
 	border-color: #AAAAAA;
 	scale: 1.2;
 	transition: scale 0.5s;
 }
-blob-element:focus
+.blob:focus
 {
 	border-color: #AAAAAA;
 	scale: 1.2;
 	transition: scale 0.5s;
 }
 
-blob-element:active
+.blob:active
 {
 	border-color: #FFFFFF;
 	background-image: linear-gradient(#707070,#707070 );

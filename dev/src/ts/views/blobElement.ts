@@ -27,6 +27,7 @@ export class BlobElement extends PseudoBlob
 		super();
 		_logger.silly(`instanceation of blob element ${blob.id}`);
 		this.blob = blob;
+		this.className="blob";
 		this.id = this.blob.id.commonId ?? this.blob.defaultName;
 		let iconUrl!:string;
 		switch (blob.id.commonId) {

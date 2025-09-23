@@ -55,9 +55,10 @@ try {
         window.customElements.define('blob-element', BlobElement);
         _logger.debug("blob defined");
         window.customElements.define('home-screen', HomeScreen);
-        window.customElements.define('profile-panel', ProfilePanel);
+        
         window.customElements.define('panel-popup', Panel);
         window.customElements.define('search-bar', Search);
+        window.customElements.define('profile-panel', ProfilePanel);
         window.customElements.define('settings-page', Settings, {extends: "dialog"});
         window.customElements.define('input-toggle', Toggle);
         
