@@ -89,7 +89,8 @@ export class BlobElement extends PseudoBlob
 		if (this.optionsPanel == undefined)
 		{
 			this.optionsPanel = new Panel(x,y,`${this.getBoundingClientRect().height}px`,`${this.getBoundingClientRect().width/2}px`);
-			document.getElementById("blobContainer")!.appendChild(this.optionsPanel);
+			//document.getElementById("blobContainer")!.appendChild(this.optionsPanel);
+			this.optionsPanel.showPopover();
 		}
 		else
 		{

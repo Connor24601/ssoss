@@ -27,10 +27,14 @@ p {
   position: fixed;
   display:flex;
   right: 2em;
-  padding: 10px;
+  margin: 0px;
+  padding: 5px;
   top: 1em;
   align-self: flex-end;
   aspect-ratio: initial;
+  background-color: #333333;
+  background-image: none;
+  opacity:100%
   
 }
 
@@ -51,7 +55,7 @@ b
   mask-image: radial-gradient(circle, white 80%, transparent 80%);
   border-radius: 100%;
   border-color: #AAAAAA;
-  border-width: 4px;
+  border-width: 3px;
   border-style:solid;
 }
 
@@ -165,6 +169,7 @@ header {
   align-content: center;
   flex:1;
   display: flex;
+  z-index: 3;
 
 }
 

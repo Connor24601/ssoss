@@ -1,5 +1,6 @@
 import { ServiceProvider } from "../util/ServiceProvider.js";
 import { Toggle } from "./components/UIElements.js";
+import { ProfilePanel } from "./profilePanel.js";
 const _logger = ServiceProvider.logService.createNewLogger("Settings");
 
 export class Settings extends HTMLDialogElement
@@ -20,14 +21,22 @@ export class Settings extends HTMLDialogElement
             _logger.silly("settings completed");
             function callback(this: any, ev: Event) {
                 (this as Toggle).toggle();
-                _logger.info(`changed state: ${ev}`);
+                ProfilePanel.singletonInstance.usingProfiles = (this as Toggle).selected;
+                ProfilePanel.singletonInstance.hidden = !(this as Toggle).selected;
+                document.getElementById("profile")!.hidden = !(this as Toggle).selected;
+                _logger.info(`value ${(this as Toggle).selected}, profile now ${document.getElementById("profile")?.hidden} ${ ProfilePanel.singletonInstance.hidden}`)
             };
-            let testSlider = new Toggle(false, callback);
+            let testSlider = new Toggle(ProfilePanel.singletonInstance.usingProfiles, callback);
+            let row = document.createElement("row");
+            let text = document.createElement("b");
             let button = document.createElement("button");
+            text.textContent = "Use Profiles";
+            row.appendChild(testSlider);
+            row.append(text);
             button.title = "logs";
-            button.textContent = "Download Logs"
+            button.textContent = "Download Logs";
             button.onclick = this.downloadLogs;
-            this.appendChild(testSlider);
+            this.appendChild(row);
             this.appendChild(button);
             
         }
