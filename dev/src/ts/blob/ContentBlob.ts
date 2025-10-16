@@ -73,7 +73,7 @@ export class ControlBlob extends ContentBlob {
 	}
 	altActivate() : void
 	{
-		_logger.info(`Transport?:`,_logger.settings.attachedTransports,ServiceProvider.logService.logger.settings.attachedTransports);
+		//_logger.info(`Transport?:`,_logger.settings.attachedTransports,ServiceProvider.logService.logger.settings.attachedTransports);
 		
 		//occurs on right-click of special blob
 	}

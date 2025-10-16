@@ -1,5 +1,16 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
+@property --background-color {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #333333;
+}
+@property --alt-background-color {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #151515;
+}
+
+@property --border-color {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #606060;
 }

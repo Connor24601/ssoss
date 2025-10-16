@@ -41,15 +41,15 @@ export enum StorageKeys {
     collabProfile = "collabProfile",
     lastProfile = "leftoverProfile",
     profiles = "profiles",
-    preferences = "prefs"
+    preferences = "prefs",
+    usingProfileService="ups"
 }
 
-// preferences are any settings that do not affect profile/blob behavior
+// preferences are any settings that do not affect blobs
 // but do change look/feel
 export class Preferences {
     background?:Background;
     autoFormatBlobs?:boolean;
-
     constructor()
     {
 
@@ -111,6 +111,9 @@ export class ProfileId
     
     id!:string;
     static default:ProfileId;
+    get key() : string  {
+        return this.id;
+    }
 
 	constructor()
     {

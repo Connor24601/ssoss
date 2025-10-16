@@ -10,6 +10,7 @@ import { Search } from "./views/search.js";
 import { Settings } from "./views/settings.js";
 import { Toggle } from "./views/components/UIElements.js";
 import { ProfilePanel } from "./views/profilePanel.js";
+import { ProfileWrapper } from "./views/profileWrapper.js";
 
 const _logger = ServiceProvider.logService.createNewLogger("Load");
 
@@ -52,15 +53,19 @@ try {
     }
 
     try {
+        _logger.debug("implementing custom elements");
+
         window.customElements.define('blob-element', BlobElement);
-        _logger.debug("blob defined");
         window.customElements.define('home-screen', HomeScreen);
         
-        window.customElements.define('panel-popup', Panel);
+        window.customElements.define('panel-popup', Panel, {extends: "div"});
         window.customElements.define('search-bar', Search);
         window.customElements.define('profile-panel', ProfilePanel);
+        window.customElements.define('profile-wrapper', ProfileWrapper, {extends: "button"});
+        
         window.customElements.define('settings-page', Settings, {extends: "dialog"});
         window.customElements.define('input-toggle', Toggle);
+        _logger.debug("Custom elements successfully defined");
         
     } catch (error) {
         _logger.fatal(`couldn't define custom elements: ${error}`, error);

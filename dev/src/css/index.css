@@ -22,21 +22,47 @@ p {
     padding: 10px 5px 0px 10px;
     margin: 2px;
 }
-#profile
+.profile
 {
-  position: fixed;
-  display:flex;
-  right: 2em;
-  margin: 0px;
   padding: 5px;
-  top: 1em;
+  display:flex;
   align-self: flex-end;
   aspect-ratio: initial;
   background-color: #333333;
   background-image: none;
-  opacity:100%
-  
+  opacity:100%;
+  transition: 0.3s;
+  border-radius: 2.5em;
+  border-style: solid;
+  border-width: 2px;
+  align-items: center;
+  transition: scale 0.5s;
+  scale: 1;
 }
+
+profile-wrapper
+{
+
+  position: fixed;
+  display:flow-root;
+  right: 2em;
+  margin: 0px;
+  padding: 2px;
+  top: 1em;
+  align-self: flex-end;
+}
+
+.profile:hover
+{
+	border-color: #AAAAAA;
+	scale: 1.1;
+	transition: scale 0.3s;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+}
+
 
 b
 {
@@ -55,9 +81,10 @@ b
   mask-image: radial-gradient(circle, white 80%, transparent 80%);
   border-radius: 100%;
   border-color: #AAAAAA;
-  border-width: 3px;
+  border-width: 2px;
   border-style:solid;
 }
+
 
 body {
     background-image: linear-gradient(#060611,#200606 );

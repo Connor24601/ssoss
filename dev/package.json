@@ -12,8 +12,7 @@
   "main": "main.ts",
   "build": {
     "appId": "com.ssoss.app",
-    "config": {
-    }
+    "config": {}
   },
   "scripts": {
     "web": "vite",
@@ -33,6 +32,7 @@
     "@capacitor/splash-screen": "latest",
     "@vitejs/plugin-vue": "^6.0.1",
     "rotating-file-stream": "^3.2.6",
+    "ts-stream": "^3.0.0",
     "tslog": "^4.9.3",
     "uuid": "^11.1.0"
   },
@@ -43,7 +43,7 @@
     "vite": "^7.1.4"
   },
   "author": {
-    "name":"Blake Johnson",
+    "name": "Blake Johnson",
     "email": "blakeconnorjohnson@gmail.com"
   },
   "license": "EUPL-1.2 license"
